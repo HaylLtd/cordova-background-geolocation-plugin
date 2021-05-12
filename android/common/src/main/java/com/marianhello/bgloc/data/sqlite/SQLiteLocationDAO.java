@@ -82,6 +82,7 @@ public class SQLiteLocationDAO implements LocationDAO {
     deleteAllLocations();
     db.setTransactionSuccessful();
     db.endTransaction();
+    return locations;
   }
 
   public BackgroundLocation getLocationById(long id) {
