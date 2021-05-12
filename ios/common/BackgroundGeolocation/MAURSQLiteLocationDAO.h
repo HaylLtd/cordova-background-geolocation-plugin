@@ -28,6 +28,9 @@
 - (BOOL) clearDatabase;
 - (NSString*) getDatabaseName;
 - (NSString*) getDatabasePath;
+// private
+- (NSString*) getLocationSelectString;
+- (MAURLocation*) convertToLocation:(FMResultSet*)rs;
 
 @end
 

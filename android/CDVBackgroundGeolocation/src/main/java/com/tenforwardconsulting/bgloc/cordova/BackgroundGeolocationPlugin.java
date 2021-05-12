@@ -59,6 +59,7 @@ public class BackgroundGeolocationPlugin extends CordovaPlugin implements Plugin
     public static final String ACTION_GET_STATIONARY = "getStationaryLocation";
     public static final String ACTION_GET_ALL_LOCATIONS = "getLocations";
     public static final String ACTION_GET_VALID_LOCATIONS = "getValidLocations";
+    public static final String ACTION_GET_VALID_LOCATIONS_AND_DELETE = "getValidLocationsAndDelete";
     public static final String ACTION_DELETE_LOCATION = "deleteLocation";
     public static final String ACTION_DELETE_ALL_LOCATIONS = "deleteAllLocations";
     public static final String ACTION_GET_CURRENT_LOCATION = "getCurrentLocation";
@@ -241,6 +242,19 @@ public class BackgroundGeolocationPlugin extends CordovaPlugin implements Plugin
                         callbackContext.success(getValidLocations());
                     } catch (JSONException e) {
                         logger.error("Getting valid locations failed: {}", e.getMessage());
+                        callbackContext.sendPluginResult(ErrorPluginResult.from("Converting locations to JSON failed", e, PluginException.JSON_ERROR));
+                    }
+                }
+            });
+
+            return true;
+        } else if (ACTION_GET_VALID_LOCATIONS_AND_DELETE.equals(action)) {
+            runOnWebViewThread(new Runnable() {
+                public void run() {
+                    try {
+                        callbackContext.success(getValidLocationsAndDelete());
+                    } catch (JSONException e) {
+                        logger.error("Getting valid locations and delete failed: {}", e.getMessage());
                         callbackContext.sendPluginResult(ErrorPluginResult.from("Converting locations to JSON failed", e, PluginException.JSON_ERROR));
                     }
                 }
@@ -493,6 +507,15 @@ public class BackgroundGeolocationPlugin extends CordovaPlugin implements Plugin
     private JSONArray getValidLocations() throws JSONException {
         JSONArray jsonLocationsArray = new JSONArray();
         Collection<BackgroundLocation> locations = facade.getValidLocations();
+        for (BackgroundLocation location : locations) {
+            jsonLocationsArray.put(location.toJSONObjectWithId());
+        }
+        return jsonLocationsArray;
+    }
+
+    private JSONArray getValidLocationsAndDelete() throws JSONException {
+        JSONArray jsonLocationsArray = new JSONArray();
+        Collection<BackgroundLocation> locations = facade.getValidLocationsAndDelete();
         for (BackgroundLocation location : locations) {
             jsonLocationsArray.put(location.toJSONObjectWithId());
         }
