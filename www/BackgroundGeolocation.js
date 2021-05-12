@@ -166,6 +166,14 @@ var BackgroundGeolocation = {
       'getValidLocations', []);
   },
 
+  getValidLocationsAndDelete: function (success, failure) {
+    assertFnc(success, [TAG, '#getValidLocationsAndDelete requires a success callback']);
+    exec(success,
+      failure || emptyFnc,
+      'BackgroundGeolocation',
+      'getValidLocationsAndDelete', []);
+  },
+
   deleteLocation: function (locationId, success, failure) {
     exec(success || emptyFnc,
       failure || emptyFnc,

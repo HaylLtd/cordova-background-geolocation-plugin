@@ -217,7 +217,7 @@ static NSString * const TAG = @"CDVBackgroundGeolocation";
 {
     NSLog(@"%@ #%@", TAG, @"getValidLocationsAndDelete");
     [self.commandDelegate runInBackground:^{
-        NSArray *locations = [facade getLocationsForSync];
+        NSArray *locations = [facade getValidLocationsAndDelete];
         NSMutableArray* dictionaryLocations = [[NSMutableArray alloc] initWithCapacity:[locations count]];
         for (MAURLocation* location in locations) {
             [dictionaryLocations addObject:[location toDictionaryWithId]];
