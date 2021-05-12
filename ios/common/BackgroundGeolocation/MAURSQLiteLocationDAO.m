@@ -41,8 +41,8 @@
 - (NSArray<MAURLocation*>*) getValidLocations
 {
     __block NSMutableArray* locations = [[NSMutableArray alloc] init];
-
-    NSString *sql = [self getLocationSelectString] @" WHERE " @LC_COLUMN_NAME_STATUS @" = ? ORDER BY " @LC_COLUMN_NAME_RECORDED_AT;
+    
+    NSString *sql = [[self getLocationSelectString] stringByAppendingString: @" WHERE " @LC_COLUMN_NAME_STATUS @" = ? ORDER BY " @LC_COLUMN_NAME_RECORDED_AT];
 
     [queue inDatabase:^(FMDatabase *database) {
         FMResultSet *rs = [database executeQuery:sql, [NSString stringWithFormat:@"%ld", MAURLocationPostPending]];
@@ -63,7 +63,7 @@
 {
     __block NSMutableArray* locations = [[NSMutableArray alloc] init];
 
-    NSString *sql = [self getLocationSelectString] @" ORDER BY " @LC_COLUMN_NAME_RECORDED_AT;
+    NSString *sql = [[self getLocationSelectString] stringByAppendingString: @" ORDER BY " @LC_COLUMN_NAME_RECORDED_AT];
 
     [queue inDatabase:^(FMDatabase *database) {
         FMResultSet *rs = [database executeQuery:sql];
@@ -85,7 +85,7 @@
     __block NSMutableArray* locations = [[NSMutableArray alloc] init];
 
     [queue inTransaction:^(FMDatabase *database, BOOL *rollback) {
-        NSString *sql = [self getLocationSelectString] @" WHERE " @LC_COLUMN_NAME_STATUS @" = ? ORDER BY " @LC_COLUMN_NAME_RECORDED_AT;
+        NSString *sql = [[self getLocationSelectString] stringByAppendingString: @" WHERE " @LC_COLUMN_NAME_STATUS @" = ? ORDER BY " @LC_COLUMN_NAME_RECORDED_AT];
 
         FMResultSet *rs = [database executeQuery:sql, [NSString stringWithFormat:@"%ld", MAURLocationPostPending]];
         while([rs next]) {
