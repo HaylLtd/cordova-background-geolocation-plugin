@@ -9,6 +9,7 @@
 #define MAURSQLiteLocationDAO_h
 
 #import <Foundation/Foundation.h>
+#import "FMDB.h"
 #import "MAURLocation.h"
 
 @class Location;
