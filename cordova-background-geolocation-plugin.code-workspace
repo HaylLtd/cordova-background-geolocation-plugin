@@ -4,5 +4,19 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {},
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"label": "test docs",
+				"type": "shell",
+				"options": {
+					"cwd": "${workspaceFolder}/docs"
+				},
+				"command": "bundle exec jekyll serve --incremental --host localhost --livereload --source ${workspaceFolder}/docs/.",
+				"problemMatcher": []
+			}
+		]
+	}
 }
