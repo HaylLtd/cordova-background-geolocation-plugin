@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # Debugging
 
 Plugin logs all activity into database. Logs are retained for 7 days.

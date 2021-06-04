@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 ## Migration to 2.0
 
 As version 2.0 platform support for Windows Phone 8 was removed.

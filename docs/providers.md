@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # Location providers
 
 ## Which provider should I use?

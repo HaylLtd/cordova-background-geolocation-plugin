@@ -1,18 +1,12 @@
-# Cordova Background Geolocation Plugin
+---
+layout: default
+nav_order: 1
+---
 
-[![npm](https://img.shields.io/npm/v/cordova-background-geolocation-plugin?style=flat-square)](https://www.npmjs.com/package/cordova-background-geolocation-plugin)
-![npm bundle size](https://img.shields.io/bundlephobia/min/cordova-background-geolocation-plugin?style=flat-square)
-![npm](https://img.shields.io/npm/dm/cordova-background-geolocation-plugin?style=flat-square)
+# Introduction
 
-[![GitHub issues](https://img.shields.io/github/issues/HaylLtd/cordova-background-geolocation-plugin?style=flat-square)](https://github.com/HaylLtd/cordova-background-geolocation-plugin/issues)
-[![GitHub stars](https://img.shields.io/github/stars/HaylLtd/cordova-background-geolocation-plugin?style=flat-square)](https://github.com/HaylLtd/cordova-background-geolocation-plugin/stargazers)
-![GitHub last commit](https://img.shields.io/github/last-commit/HaylLtd/cordova-background-geolocation-plugin?style=flat-square)
-
-![cordova](https://img.shields.io/badge/cordova-ios%20%7C%20android-blue?style=flat-square)
-
-## Introduction
-
-### Cross-platform geolocation for Cordova / PhoneGap with battery-saving "circular region monitoring" and "stop detection"
+Cross-platform geolocation for Cordova / PhoneGap with battery-saving "circular region monitoring" and "stop detection"
+{: .fw-500 }
 
 This plugin can be used for geolocation when the app is running in the foreground or background. It is more battery and data efficient than html5 geolocation or cordova-geolocation plugin. It can be used side by side with other geolocation providers (eg. html5 navigator.geolocation).
 
@@ -68,18 +62,8 @@ If service wants to continue to run in the background, it must "promote" itself 
 
 The notification can only be disabled, when app is running in the foreground, by setting config option `startForeground: false` (this is the default option), but will always be visible in the background (if service was started).
 
-Recommend you to read <https://developer.android.com/about/versions/oreo/background>
-
-## Registering plugin for Adobe® PhoneGap™ Build
-
-This plugin should work with Adobe® PhoneGap™ Build without any modification.
-To register plugin add following line into your `config.xml`:
-
-```xml
-<plugin name="cordova-background-geolocation-plugin"/>
-```
-
-**Note:** If you're using *hydration*, you have to download and reinstall your app with every new version of the plugin, as plugins are not updated.
+Recommended reading: <https://developer.android.com/about/versions/oreo/background>
+{: .bg-yellow-000}
 
 ## Compilation
 
@@ -110,7 +94,7 @@ The support libraries are now available through Google's Maven repository.
 
 ## Example
 
-```javascript
+```js
 function onDeviceReady() {
   BackgroundGeolocation.configure({
     locationProvider: BackgroundGeolocation.ACTIVITY_PROVIDER,
