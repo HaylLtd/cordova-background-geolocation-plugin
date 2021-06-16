@@ -1,8 +1,9 @@
 ---
 layout: default
+title: HTTP Location Posting
 ---
 
-# HTTP location posting
+# HTTP Location Posting
 
 All locations updates are recorded in the local db at all times. When the App is in foreground or background, in addition to storing location in local db,
 the location callback function is triggered. The number of locations stored in db is limited by `option.maxLocations` and never exceeds this number.

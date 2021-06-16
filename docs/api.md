@@ -1,3 +1,9 @@
+---
+layout: default
+nav_order: 2
+title: API
+---
+
 # API
 
 ## configure(options, success, fail)

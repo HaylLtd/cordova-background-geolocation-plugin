@@ -1,14 +1,16 @@
 ---
 layout: default
+has_children: true
+title: Location Providers
 ---
 
-# Location providers
+# Location Providers
 
 ## Which provider should I use?
 
 ### DISTANCE_FILTER_PROVIDER
 
-This is classic provider, originally from cristocracy. It's best to use this one as background location provider. It is using Stationary API and elastic distance filter to achieve optimal battery and data usage. You can read more about this provider in [DISTANCE_FILTER_PROVIDER.md](/DISTANCE_FILTER_PROVIDER.md).
+This is classic provider, originally from cristocracy. It's best to use this one as background location provider. It is using Stationary API and elastic distance filter to achieve optimal battery and data usage. You can read more about this provider in [Distance Filter Provider](distance_filter_provider).
 
 ### ACTIVITY_PROVIDER
 
