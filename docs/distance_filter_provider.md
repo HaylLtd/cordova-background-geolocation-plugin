@@ -1,4 +1,10 @@
-# Behaviour
+---
+layout: default
+title: Distance Filter Provider
+parent: Location Providers
+---
+
+# Distance Filter Provider
 
 This provider has features allowing you to control the behaviour of background-tracking, striking a balance between accuracy and battery-usage.  In stationary-mode, the plugin attempts to decrease its power usage and accuracy by setting up a circular stationary-region of configurable `stationaryRadius`. iOS has a nice system [Significant Changes API](https://developer.apple.com/library/ios/documentation/CoreLocation/Reference/CLLocationManager_Class/CLLocationManager/CLLocationManager.html#//apple_ref/occ/instm/CLLocationManager/startMonitoringSignificantLocationChanges), which allows the os to suspend your app until a cell-tower change is detected (typically 2-3 city-block change) Android uses [LocationManager#addProximityAlert](http://developer.android.com/reference/android/location/LocationManager.html).
 
@@ -32,10 +38,10 @@ A gps location will be recorded every 930m
 
 Note the following real example of background-geolocation on highway 101 towards San Francisco as the driver slows down as he runs into slower traffic (geolocations become compressed as distanceFilter decreases)
 
-![distanceFilter at highway speed](/distance-filter-highway.png "distanceFilter at highway speed")
+![distanceFilter at highway speed](distance-filter-highway.png "distanceFilter at highway speed")
 
 Compare now background-geolocation in the scope of a city.  In this image, the left-hand track is from a cab-ride, while the right-hand track is walking speed.
 
-![distanceFilter at city scale](/distance-filter-city.png "distanceFilter at city scale")
+![distanceFilter at city scale](distance-filter-city.png "distanceFilter at city scale")
 
 **NOTE:** `distanceFilter` is elastically auto-calculated by the plugin:  When speed increases, distanceFilter increases;  when speed decreases, so does distanceFilter.
