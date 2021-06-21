@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Quirks
+nav_order: 8
 ---
 
 # Quirks
@@ -18,7 +19,7 @@ Plugin cannot detect the exact moment the device moves out of the stationary-rad
 
 ## Android
 
-On Android devices it is recommended to have a notification in the drawer (option `startForeground:true`). This gives plugin location service higher priority, decreasing probability of OS killing it. Check [wiki](https://github.com/mauron85/cordova-plugin-background-geolocation/wiki/Android-implementation) for explanation.
+On Android devices it is recommended to have a notification in the drawer (option `startForeground:true`). This gives plugin location service higher priority, decreasing probability of OS killing it.
 
 On Android devices, the location event callback will not consistently be called while the app is in the background, even with `startForeground:true`. If you need to post the location updates as they happen, you should use [HTTP Posting](http_posting).
 

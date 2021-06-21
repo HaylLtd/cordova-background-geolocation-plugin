@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Contributor Covenant Code of Conduct
+nav_order: 99
 ---
 
 # Contributor Covenant Code of Conduct

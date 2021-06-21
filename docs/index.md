@@ -6,7 +6,7 @@ title: Introduction
 
 # Introduction
 
-Cross-platform geolocation for Cordova / PhoneGap with battery-saving "circular region monitoring" and "stop detection"
+Cross-platform geolocation for Cordova with battery-saving "circular region monitoring" and "stop detection"
 {: .fw-500 }
 
 This plugin can be used for geolocation when the app is running in the foreground or background. It is more battery and data efficient than html5 geolocation or cordova-geolocation plugin. It can be used side by side with other geolocation providers (eg. html5 navigator.geolocation).
@@ -106,39 +106,6 @@ You will need to ensure that you have installed the following items through the 
 
 Android is no longer supporting downloading support libraries through the SDK Manager.
 The support libraries are now available through Google's Maven repository.
-
-### Android Headless Task (Experimental)
-
-A special task that gets executed when the app is terminated, but the plugin was configured to continue running in the background (option `stopOnTerminate: false`).
-In this scenario the [Activity](https://developer.android.com/reference/android/app/Activity.html)
-was killed by the system and all registered event listeners will not be triggered until the app is relaunched.
-
-**Note:** Prefer configuration options `url` and `syncUrl` over headless task. Use it sparingly!
-
-#### Task event
-
-| Parameter          | Type      | Description                                                            |
-|--------------------|-----------|------------------------------------------------------------------------|
-| `event.name`       | `String`  | Name of the event [ "location", "stationary", "activity" ]             |
-| `event.params`     | `Object`  | Event parameters. See [Events](events)                               |
-
-Keep in mind that the callback function lives in an isolated scope. Variables from a higher scope cannot be referenced!
-
-Following example requires [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) enabled backend server.
-
-```javascript
-BackgroundGeolocation.headlessTask(function(event) {
-    if (event.name === 'location' ||
-      event.name === 'stationary') {
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'http://192.168.81.14:3000/headless');
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.send(JSON.stringify(event.params));
-    }
-
-    return 'Processing event: ' + event.name; // will be logged
-});
-```
 
 ## Geofencing
 

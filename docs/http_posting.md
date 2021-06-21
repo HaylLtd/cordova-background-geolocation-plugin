@@ -1,6 +1,7 @@
 ---
 layout: default
 title: HTTP Location Posting
+nav_order: 5
 ---
 
 # HTTP Location Posting
