@@ -14,16 +14,10 @@ var channel = require('cordova/channel');
 var radio = require('./radio');
 var TAG = 'CDVBackgroundGeolocation';
 
-var emptyFnc = function () { };
-
 var assert = function (condition, msgArray) {
   if (!condition) {
       throw new Error(msgArray.join('') || 'Assertion failed');
   }
-}
-
-var assertFnc = function(fnc, msgArray) {
-  assert(typeof (fnc) === 'function', msgArray);
 }
 
 var eventHandler = function (event) {
@@ -40,6 +34,15 @@ var unsubscribeAll = function (channels) {
     var callbacks = [].concat.apply([], topic.channels[channel]); // flatten array
     topic.unsubscribe.apply(topic, callbacks);
   });
+}
+
+var execWithPromise = function (suceess, failure, method, data) {
+  if (!suceess && !failure) {
+    return new Promise(function (resolve, reject) {
+      exec(resolve, reject, 'BackgroundGeolocation', method, data);    
+    });
+  }
+  exec(suceess || function() {}, failure || function() {}, 'BackgroundGeolocation', method, data || []);
 }
 
 var BackgroundGeolocation = {
@@ -84,86 +87,64 @@ var BackgroundGeolocation = {
   TIMEOUT: 3,
 
   configure: function (config, success, failure) {
-    exec(success || emptyFnc,
-      failure || emptyFnc,
-      'BackgroundGeolocation',
+    return execWithPromise(success,
+      failure,
       'configure',
       [config]
     );
   },
 
   start: function () {
-    exec(null, null, 'BackgroundGeolocation', 'start');
+    return execWithPromise(null, null, 'start');
   },
 
-  stop: function (success, failure) {
-    exec(null, null, 'BackgroundGeolocation', 'stop');
+  stop: function () {
+    return execWithPromise(null, null, 'stop');
   },
 
   switchMode: function (mode, success, failure) {
-    exec(success || emptyFnc,
-      failure || emptyFnc,
-      'BackgroundGeolocation',
+    return execWithPromise(success,
+      failure,
       'switchMode', [mode]);
   },
 
   getConfig: function (success, failure) {
-    assertFnc(success, [TAG, '#getConfig requires a success callback']);
-    exec(success,
-      failure || emptyFnc,
-      'BackgroundGeolocation',
-      'getConfig', []);
+    return execWithPromise(success,
+      failure,
+      'getConfig');
   },
 
   /**
    * Returns current stationaryLocation if available.  null if not
    */
   getStationaryLocation: function (success, failure) {
-    assertFnc(success, [TAG, '#getStationaryLocation requires a success callback']);
-    exec(success,
-      failure || emptyFnc,
-      'BackgroundGeolocation',
-      'getStationaryLocation', []);
-  },
-
-  // @deprecated
-  isLocationEnabled: function (success, failure) {
-    console.log('[WARN]: ' + TAG + '#isLocationEnabled is deprecated! Use checkStatus instead.');
-    assertFnc(success, [TAG, '#isLocationEnabled requires a success callback']);
-    exec(success,
-      failure || emptyFnc,
-      'BackgroundGeolocation',
-      'isLocationEnabled', []);
+    return execWithPromise(success,
+      failure,
+      'getStationaryLocation');
   },
 
   showAppSettings: function () {
-    exec(emptyFnc,
-      emptyFnc,
-      'BackgroundGeolocation',
-      'showAppSettings', []);
+    return execWithPromise(null,
+      null,
+      'showAppSettings');
   },
 
   showLocationSettings: function () {
-    exec(emptyFnc,
-      emptyFnc,
-      'BackgroundGeolocation',
-      'showLocationSettings', []);
+    return execWithPromise(null,
+      null,
+      'showLocationSettings');
   },
 
   getLocations: function (success, failure) {
-    assertFnc(success, [TAG, '#getLocations requires a success callback']);
-    exec(success,
-      failure || emptyFnc,
-      'BackgroundGeolocation',
-      'getLocations', []);
+    return execWithPromise(success,
+      failure,
+      'getLocations');
   },
 
   getValidLocations: function (success, failure) {
-    assertFnc(success, [TAG, '#getValidLocations requires a success callback']);
-    exec(success,
-      failure || emptyFnc,
-      'BackgroundGeolocation',
-      'getValidLocations', []);
+    return execWithPromise(success,
+      failure,
+      'getValidLocations');
   },
 
   getValidLocationsAndDelete: function (success, failure) {
@@ -175,89 +156,65 @@ var BackgroundGeolocation = {
   },
 
   deleteLocation: function (locationId, success, failure) {
-    exec(success || emptyFnc,
-      failure || emptyFnc,
-      'BackgroundGeolocation',
+    return execWithPromise(success,
+      failure,
       'deleteLocation', [locationId]);
   },
 
   deleteAllLocations: function (success, failure) {
-    exec(success || emptyFnc,
-      failure || emptyFnc,
-      'BackgroundGeolocation',
-      'deleteAllLocations', []);
+    return execWithPromise(success,
+      failure,
+      'deleteAllLocations');
   },
 
   getCurrentLocation: function(success, failure, options) {
     options = options || {};
-    exec(success || emptyFnc,
-      failure || emptyFnc,
-      'BackgroundGeolocation',
+    return execWithPromise(success,
+      failure,
       'getCurrentLocation', [options.timeout, options.maximumAge, options.enableHighAccuracy]);
   },
 
-  getLogEntries: function(limit /*, offset = 0, minLevel = "DEBUG", success = emptyFnc, failure = emptyFnc */) {
-    var acnt = arguments.length;
-    var offset, minLevel, success, error;
-
-    if (acnt > 1 && typeof arguments[1] == 'function') {
-      // backward compatibility
-      console.log('[WARN]: Calling deprecated variant of ' + TAG + '#getLogEntries method.');
-      offset = 0;
-      minLevel = BackgroundGeolocation.LOG_DEBUG;
-      success = arguments[1] || emptyFnc;
-      failure = arguments[2] || emptyFnc;
-    } else {
-      offset = acnt > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-      minLevel = acnt > 2 && arguments[2] !== undefined ? arguments[2] : BackgroundGeolocation.LOG_DEBUG;
-      success = acnt > 3 && arguments[3] !== undefined ? arguments[3] : emptyFnc;
-      failure = acnt > 4 && arguments[4] !== undefined ? arguments[4] : emptyFnc;
-    }
-
-    exec(success,
+  getLogEntries: function(limit, offset = 0, minLevel = "DEBUG", success, failure) {
+    return execWithPromise(success,
       failure,
-      'BackgroundGeolocation',
       'getLogEntries', [limit, offset, minLevel]);
   },
 
   checkStatus: function (success, failure) {
-    exec(success || emptyFnc,
-      failure || emptyFnc,
-      'BackgroundGeolocation',
+    return execWithPromise(success,
+      failure,
       'checkStatus')
   },
 
   startTask: function (success, failure) {
-    exec(success || emptyFnc,
-      failure || emptyFnc,
-      'BackgroundGeolocation',
+    return execWithPromise(success,
+      failure,
       'startTask');
   },
 
   endTask: function (taskKey, success, failure) {
-    exec(success || emptyFnc,
-      failure || emptyFnc,
-      'BackgroundGeolocation',
+    return execWithPromise(success,
+      failure,
       'endTask', [taskKey]);
   },
 
   headlessTask: function (func, success, failure) {
-    exec(success || emptyFnc,
-      failure || emptyFnc,
-      'BackgroundGeolocation',
+    return execWithPromise(success,
+      failure,
       'registerHeadlessTask', [func.toString()]);
   },
 
   forceSync: function (success, failure) {
-    exec(success || emptyFnc,
-      failure || emptyFnc,
-      'BackgroundGeolocation',
-      'forceSync', []);
+    return execWithPromise(success,
+      failure,
+      'forceSync');
   },
 
   on: function (event, callbackFn) {
-    assertFnc(callbackFn, [TAG, '#on requires a callback function']);
     assert(this.events.indexOf(event) > -1, [TAG, '#on unknown event "' + event + '"']);
+    if (!callbackFn) {
+      return radio(event);
+    }
     radio(event).subscribe(callbackFn);
     return {
       remove: function () {

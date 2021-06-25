@@ -149,7 +149,8 @@ public class BackgroundGeolocationPlugin extends CordovaPlugin implements Plugin
         else if (ACTION_START.equals(action)) {
             runOnWebViewThread(new Runnable() {
                 public void run() {
-                    start();
+                    facade.start();
+                    callbackContext.success();
                 }
             });
 
@@ -158,6 +159,7 @@ public class BackgroundGeolocationPlugin extends CordovaPlugin implements Plugin
             runOnWebViewThread(new Runnable() {
                 public void run() {
                     facade.stop();
+                    callbackContext.success();
                 }
             });
 
@@ -366,10 +368,6 @@ public class BackgroundGeolocationPlugin extends CordovaPlugin implements Plugin
         }
 
         return false;
-    }
-
-    private void start() {
-        facade.start();
     }
 
     /**

@@ -15,6 +15,14 @@ type AccuracyLevel = 0 | 100 | 1000 | 10000 | number;
 type LocationErrorCode = 1 | 2 | 3;
 type ServiceMode = 0 | 1;
 
+export interface Unsubscribable {
+  unsubscribe(): void;
+}
+
+export interface Subscribable<T> {
+  subscribe(callback: (value: T) => any): Unsubscribable;
+}
+
 export interface ConfigureOptions {
   /**
    * Set location provider
@@ -497,19 +505,19 @@ export interface BackgroundGeolocationPlugin {
     options: ConfigureOptions,
     success?: () => void,
     fail?: () => void
-  ): void;
+  ): Promise<void>;
 
   /**
    * Start background geolocation.
    * Platform: iOS, Android
    */
-  start(): void;
+  start(): Promise<void>;
 
   /**
    * Stop background geolocation.
    * Platform: iOS, Android
    */
-  stop(): void;
+  stop(): Promise<void>;
 
   /**
    * One time location check to get current location of the device.
@@ -521,10 +529,10 @@ export interface BackgroundGeolocationPlugin {
    * @param options
    */
   getCurrentLocation(
-    success: (location: Location) => void,
+    success?: (location: Location) => void,
     fail?: (error: LocationError) => void | null,
     options?: LocationOptions
-  ): void;
+  ): Promise<Location>;
 
   /**
    * Returns current stationaryLocation if available. Null if not
@@ -535,9 +543,9 @@ export interface BackgroundGeolocationPlugin {
    * @param fail
    */
   getStationaryLocation(
-    success: (location: StationaryLocation | null) => void,
+    success?: (location: StationaryLocation | null) => void,
     fail?: (error: BackgroundGeolocationError) => void,
-  ): void;
+  ): Promise<StationaryLocation>;
 
   /**
    * Check status of the service
@@ -546,23 +554,23 @@ export interface BackgroundGeolocationPlugin {
    * @param fail
    */
   checkStatus(
-    success: (status: ServiceStatus) => void,
+    success?: (status: ServiceStatus) => void,
     fail?: (error: BackgroundGeolocationError) => void
-  ): void;
+  ): Promise<ServiceStatus>;
 
   /**
    * Show app settings to allow change of app location permissions.
    *
    * Platform: Android >= 6, iOS >= 8.0
    */
-  showAppSettings(): void;
+  showAppSettings(): Promise<void>;
 
   /**
    * Show system settings to allow configuration of current location sources.
    *
    * Platform: Android
    */
-  showLocationSettings(): void;
+  showLocationSettings(): Promise<void>;
 
   /**
    * Return all stored locations.
@@ -574,9 +582,9 @@ export interface BackgroundGeolocationPlugin {
    * @param fail
    */
   getLocations(
-    success: (locations: Location[]) => void,
+    success?: (locations: Location[]) => void,
     fail?: (error: BackgroundGeolocationError) => void
-  ): void;
+  ): Promise<Location[]>;
 
   /**
    * Method will return locations which have not yet been posted to server.
@@ -585,9 +593,9 @@ export interface BackgroundGeolocationPlugin {
    * @param fail
    */
   getValidLocations(
-    success: (location: Location[]) => void,
+    success?: (location: Location[]) => void,
     fail?: (error: BackgroundGeolocationError) => void
-  ): void;
+  ): Promise<Location[]>;
 
     /**
    * Method will return locations which have not yet been posted to server and delete to avoid getting them again.
@@ -613,7 +621,7 @@ export interface BackgroundGeolocationPlugin {
     locationId: number,
     success?: () => void,
     fail?: (error: BackgroundGeolocationError) => void
-  ): void;
+  ): Promise<void>;
 
   /**
    * Delete all stored locations.
@@ -629,7 +637,7 @@ export interface BackgroundGeolocationPlugin {
   deleteAllLocations(
     success?: () => void,
     fail?: (error: BackgroundGeolocationError) => void
-  ): void;
+  ): Promise<void>;
 
   /**
    * Switch plugin operation mode,
@@ -650,7 +658,7 @@ export interface BackgroundGeolocationPlugin {
     modeId: ServiceMode,
     success?: () => void,
     fail?: (error: BackgroundGeolocationError) => void
-  ): void;
+  ): Promise<void>;
 
   /**
    * Force sync of pending locations.
@@ -664,7 +672,7 @@ export interface BackgroundGeolocationPlugin {
   forceSync(
     success?: () => void,
     fail?: (error: BackgroundGeolocationError) => void
-  ): void;
+  ): Promise<void>;
 
   /**
    * Get stored configuration options.
@@ -673,9 +681,9 @@ export interface BackgroundGeolocationPlugin {
    * @param fail
    */
   getConfig(
-    success: (options: ConfigureOptions) => void,
+    success?: (options: ConfigureOptions) => void,
     fail?: (error: BackgroundGeolocationError) => void
-  ): void;
+  ): Promise<ConfigureOptions>;
 
   /**
    * Return all logged events. Useful for plugin debugging.
@@ -692,9 +700,9 @@ export interface BackgroundGeolocationPlugin {
     limit: number,
     fromId: number,
     minLevel: LogLevel,
-    success: (entries: LogEntry[]) => void,
+    success?: (entries: LogEntry[]) => void,
     fail?: (error: BackgroundGeolocationError) => void
-  ): void;
+  ): Promise<LogEntry[]>;
 
   /**
    * Unregister all event listeners for given event.
@@ -717,9 +725,9 @@ export interface BackgroundGeolocationPlugin {
    * @param fail
    */
   startTask(
-    success: (taskKey: number) => void,
+    success?: (taskKey: number) => void,
     fail?: (error: BackgroundGeolocationError) => void
-  ): void;
+  ): Promise<number>;
 
   /**
    * End background task indentified by taskKey (iOS only)
@@ -732,7 +740,7 @@ export interface BackgroundGeolocationPlugin {
     taskKey: number,
     success?: () => void,
     fail?: (error: BackgroundGeolocationError) => void
-  ): void;
+  ): Promise<void>;
 
   /**
    * A special task that gets executed when the app is terminated, but
@@ -767,8 +775,8 @@ export interface BackgroundGeolocationPlugin {
    */
   on(
     eventName: 'location',
-    callback: (location: Location) => void
-  ): void;
+    callback?: (location: Location) => void
+  ): Subscribable<Location>;
 
   /**
    * Register stationary location event listener.
@@ -778,8 +786,8 @@ export interface BackgroundGeolocationPlugin {
    */
   on(
     eventName: 'stationary',
-    callback: (location: StationaryLocation) => void
-  ): void;
+    callback?: (location: StationaryLocation) => void
+  ): Subscribable<StationaryLocation>;
 
   /**
    * Register activity monitoring listener.
@@ -789,8 +797,8 @@ export interface BackgroundGeolocationPlugin {
    */
   on(
     eventName: 'activity',
-    callback: (activity: Activity) => void
-  ): void;
+    callback?: (activity: Activity) => void
+  ): Subscribable<Activity>;
 
   /**
    * Register start event listener.
@@ -802,8 +810,8 @@ export interface BackgroundGeolocationPlugin {
    */
   on(
     eventName: 'start',
-    callback: () => void
-  ): void;
+    callback?: () => void
+  ): Subscribable<void>;
 
   /**
    * Register stop event listener.
@@ -815,8 +823,8 @@ export interface BackgroundGeolocationPlugin {
    */
   on(
     eventName: 'stop',
-    callback: () => void
-  ): void;
+    callback?: () => void
+  ): Subscribable<void>;
 
   /**
    * Register error listener.
@@ -826,8 +834,8 @@ export interface BackgroundGeolocationPlugin {
    */
   on(
     eventName: 'error',
-    callback: (error: BackgroundGeolocationError) => void
-  ): void;
+    callback?: (error: BackgroundGeolocationError) => void
+  ): Subscribable<BackgroundGeolocationError>;
 
   /**
    * Register authorization listener.
@@ -840,8 +848,8 @@ export interface BackgroundGeolocationPlugin {
    */
   on(
     eventName: 'authorization',
-    callback: (status: AuthorizationStatus) => void
-  ): void;
+    callback?: (status: AuthorizationStatus) => void
+  ): Subscribable<AuthorizationStatus>;
 
   /**
    * Register foreground event listener.
@@ -853,8 +861,8 @@ export interface BackgroundGeolocationPlugin {
    */
   on(
     eventName: 'foreground',
-    callback: () => void
-  ): void;
+    callback?: () => void
+  ): Subscribable<void>;
 
   /**
    * Register background event listener.
@@ -866,8 +874,8 @@ export interface BackgroundGeolocationPlugin {
    */
   on(
     eventName: 'background',
-    callback: () => void
-  ): void;
+    callback?: () => void
+  ): Subscribable<void>;
 
   /**
    * Register abort_requested event listener.
@@ -879,8 +887,8 @@ export interface BackgroundGeolocationPlugin {
    */
   on(
     eventName: 'abort_requested',
-    callback: () => void
-  ): void;
+    callback?: () => void
+  ): Subscribable<void>;
 
   /**
    * Register http_authorization event listener.
@@ -892,8 +900,8 @@ export interface BackgroundGeolocationPlugin {
    */
   on(
     eventName: 'http_authorization',
-    callback: () => void
-  ): void;
+    callback?: () => void
+  ): Subscribable<void>;
 
 }
 
