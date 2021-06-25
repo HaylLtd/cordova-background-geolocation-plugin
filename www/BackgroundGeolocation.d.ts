@@ -604,9 +604,9 @@ export interface BackgroundGeolocationPlugin {
    * @param fail
    */
   getValidLocationsAndDelete(
-    success: (location: Location[]) => void,
+    success?: (location: Location[]) => void,
     fail?: (error: BackgroundGeolocationError) => void
-  ): void;
+  ): Promise<Location[]>;
 
   /**
    * Delete location by locationId.

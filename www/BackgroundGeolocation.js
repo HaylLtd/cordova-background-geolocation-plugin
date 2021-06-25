@@ -148,11 +148,9 @@ var BackgroundGeolocation = {
   },
 
   getValidLocationsAndDelete: function (success, failure) {
-    assertFnc(success, [TAG, '#getValidLocationsAndDelete requires a success callback']);
-    exec(success,
-      failure || emptyFnc,
-      'BackgroundGeolocation',
-      'getValidLocationsAndDelete', []);
+    return execWithPromise(success, 
+      failure,
+      'getValidLocationsAndDelete');
   },
 
   deleteLocation: function (locationId, success, failure) {
