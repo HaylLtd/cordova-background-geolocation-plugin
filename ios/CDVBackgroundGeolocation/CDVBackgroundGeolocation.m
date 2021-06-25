@@ -77,6 +77,13 @@ static NSString * const TAG = @"CDVBackgroundGeolocation";
         } else {
             [self sendError:error];
         }
+        CDVPluginResult* result = nil;
+        if ([facade configure:config error:&error]) {
+            result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+        } else {
+            result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsDictionary:[self errorToDictionary:error]];
+        }
+        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
     }];
 }
 
@@ -95,6 +102,13 @@ static NSString * const TAG = @"CDVBackgroundGeolocation";
         } else {
             [self sendError:error];
         }
+        CDVPluginResult* result = nil;
+        if ([facade configure:config error:&error]) {
+            result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+        } else {
+            result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsDictionary:[self errorToDictionary:error]];
+        }
+        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
     }];
 }
 
