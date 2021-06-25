@@ -1,18 +1,13 @@
-# Cordova Background Geolocation Plugin
+---
+layout: default
+nav_order: 1
+title: Introduction
+---
 
-[![npm](https://img.shields.io/npm/v/cordova-background-geolocation-plugin?style=flat-square)](https://www.npmjs.com/package/cordova-background-geolocation-plugin)
-![npm bundle size](https://img.shields.io/bundlephobia/min/cordova-background-geolocation-plugin?style=flat-square)
-![npm](https://img.shields.io/npm/dm/cordova-background-geolocation-plugin?style=flat-square)
+# Introduction
 
-[![GitHub issues](https://img.shields.io/github/issues/HaylLtd/cordova-background-geolocation-plugin?style=flat-square)](https://github.com/HaylLtd/cordova-background-geolocation-plugin/issues)
-[![GitHub stars](https://img.shields.io/github/stars/HaylLtd/cordova-background-geolocation-plugin?style=flat-square)](https://github.com/HaylLtd/cordova-background-geolocation-plugin/stargazers)
-![GitHub last commit](https://img.shields.io/github/last-commit/HaylLtd/cordova-background-geolocation-plugin?style=flat-square)
-
-![cordova](https://img.shields.io/badge/cordova-ios%20%7C%20android-blue?style=flat-square)
-
-## Introduction
-
-*Cross-platform geolocation for Cordova with battery-saving "circular region monitoring" and "stop detection"*
+Cross-platform geolocation for Cordova with battery-saving "circular region monitoring" and "stop detection"
+{: .fw-500 }
 
 This plugin can be used for geolocation when the app is running in the foreground or background. It is more battery and data efficient than html5 geolocation or cordova-geolocation plugin. It can be used side by side with other geolocation providers (eg. html5 navigator.geolocation).
 
@@ -22,9 +17,7 @@ We are also looking to maintainers to help with this, so that the project does n
 
 The NPM package can be found at [cordova-background-geolocation-plugin](https://www.npmjs.com/package/cordova-background-geolocation-plugin).
 
-<font size="4">[Documentation](https://haylltd.github.io/cordova-background-geolocation-plugin/)</font>
-
-### Installing the plugin
+## Installing the plugin
 
 ```bash
 cordova plugin add cordova-background-geolocation-plugin
@@ -44,7 +37,7 @@ cordova plugin add cordova-background-geolocation-plugin \
 
 **Note:** To apply changes, you must remove and reinstall plugin.
 
-### Usage
+## Usage
 
 First, configure the plugin with the settings you require.
 
@@ -75,13 +68,48 @@ BackgroundGeolocation.configure({
 
 Then call `start()` to start location tracking.
 
-A more comprehensive example can be found in the [Documentation](https://haylltd.github.io/cordova-background-geolocation-plugin/example)
+For a more detailed example, see [Example](example)
+
+### Location Providers
+
+You can choose from three location providers:
+
+* **DISTANCE_FILTER_PROVIDER**
+* **ACTIVITY_PROVIDER**
+* **RAW_PROVIDER**
+
+*See [Which provider should I use?](providers) for more information about providers.*
+
+## Compilation
 
 ### Compatibility
 
 | Plugin version   | Cordova CLI       | Cordova Platform Android | Cordova Platform iOS |
 |------------------|-------------------|--------------------------|----------------------|
 | >1.0.0           | 8.0.0             | 8.0.0                    | 6.0.0                |
+
+**Please note** that as of Cordova Android 8.0.0 icons are by default mipmap/ic_launcher  not mipmap/icon, so this plugin will have a build issue on < 8.0.0 Cordova Android builds, you will need to update the icons in AndroidManifest.xml to work on older versions.
+
+### Android SDKs
+
+You will need to ensure that you have installed the following items through the Android SDK Manager:
+
+| Name                       | Version  |
+|----------------------------|----------|
+| Android SDK Tools          | >26.0.2  |
+| Android SDK Platform-tools | >26.0.2  |
+| Android SDK Build-tools    | >26.0.2  |
+| Android Support Repository | >47      |
+| Android Support Library    | >26.1.0  |
+| Google Play Services       | >11.8.0  |
+| Google Repository          | >58      |
+
+Android is no longer supporting downloading support libraries through the SDK Manager.
+The support libraries are now available through Google's Maven repository.
+
+## Geofencing
+
+There is nice cordova plugin [cordova-plugin-geofence](https://github.com/cowbell/cordova-plugin-geofence), which does exactly that. Let's keep this plugin lightweight as much as possible.
 
 ## Licence
 

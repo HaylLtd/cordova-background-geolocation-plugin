@@ -1,0 +1,9 @@
+remote_theme: pmarsceill/just-the-docs
+title: Cordova Background Geolocaton Plugin
+# Aux links for the upper right navigation
+aux_links:
+  "View Project on GitHub":
+    - "//github.com/HaylLtd/cordova-background-geolocation-plugin"
+
+# Makes Aux links open in a new tab. Default is false
+aux_links_new_tab: true

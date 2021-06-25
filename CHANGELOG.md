@@ -1,5 +1,14 @@
 # Changelog
 
+## [Unreleased](https://github.com/HaylLtd/cordova-background-geolocation-plugin/tree/HEAD)
+
+**Documentation:**
+
+- Move documentation to GitHub Pages [\#32](https://github.com/HaylLtd/cordova-background-geolocation-plugin/issues/32)
+- docs: move to github pages [\#35](https://github.com/HaylLtd/cordova-background-geolocation-plugin/pull/35) ([RaddishIoW](https://github.com/RaddishIoW))
+
+## [v1.0.0](https://github.com/HaylLtd/cordova-background-geolocation-plugin/tree/v1.0.0) (2021-05-04)
+
 ## [v1.0.0-rc.5](https://github.com/HaylLtd/cordova-background-geolocation-plugin/tree/v1.0.0-rc.5) (2021-05-03)
 
 **Fixed bugs:**
