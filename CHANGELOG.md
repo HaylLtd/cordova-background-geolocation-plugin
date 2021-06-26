@@ -24,10 +24,6 @@
 - Missing org.apache.http.legacy library dependency [\#24](https://github.com/HaylLtd/cordova-background-geolocation-plugin/issues/24)
 - \[Android\] Fresh install fails on resources \(icon\) not found [\#23](https://github.com/HaylLtd/cordova-background-geolocation-plugin/issues/23)
 
-**Documentation:**
-
-- docs: move to github pages [\#35](https://github.com/HaylLtd/cordova-background-geolocation-plugin/pull/35) ([RaddishIoW](https://github.com/RaddishIoW))
-
 **Closed issues:**
 
 - Move platform specific sub modules into main repository [\#22](https://github.com/HaylLtd/cordova-background-geolocation-plugin/issues/22)
