@@ -5,15 +5,14 @@
 **Implemented enhancements:**
 
 - Add promises and subscription to js interface [\#16](https://github.com/HaylLtd/cordova-background-geolocation-plugin/issues/16)
-- Adds promises and subscription [\#36](https://github.com/HaylLtd/cordova-background-geolocation-plugin/pull/36) ([HarelM](https://github.com/HarelM))
 
 **Documentation:**
 
 - Move documentation to GitHub Pages [\#32](https://github.com/HaylLtd/cordova-background-geolocation-plugin/issues/32)
-- docs: move to github pages [\#35](https://github.com/HaylLtd/cordova-background-geolocation-plugin/pull/35) ([RaddishIoW](https://github.com/RaddishIoW))
 
 **Closed issues:**
 
+- Remove old/stale branches [\#41](https://github.com/HaylLtd/cordova-background-geolocation-plugin/issues/41)
 - Update project documentation to reflect new repository and package details [\#11](https://github.com/HaylLtd/cordova-background-geolocation-plugin/issues/11)
 
 ## [v1.0.0](https://github.com/HaylLtd/cordova-background-geolocation-plugin/tree/v1.0.0) (2021-05-04)
@@ -24,6 +23,10 @@
 
 - Missing org.apache.http.legacy library dependency [\#24](https://github.com/HaylLtd/cordova-background-geolocation-plugin/issues/24)
 - \[Android\] Fresh install fails on resources \(icon\) not found [\#23](https://github.com/HaylLtd/cordova-background-geolocation-plugin/issues/23)
+
+**Documentation:**
+
+- docs: move to github pages [\#35](https://github.com/HaylLtd/cordova-background-geolocation-plugin/pull/35) ([RaddishIoW](https://github.com/RaddishIoW))
 
 **Closed issues:**
 
