@@ -349,6 +349,12 @@ FMDBLogger *sqliteLogger;
     return [locationDAO getValidLocations];
 }
 
+- (NSArray<MAURLocation*>*) getValidLocationsAndDelete
+{
+    MAURSQLiteLocationDAO* locationDAO = [MAURSQLiteLocationDAO sharedInstance];
+    return [locationDAO getLocationsForSync];
+}
+
 - (BOOL) deleteLocation:(NSNumber*)locationId error:(NSError * __autoreleasing *)outError
 {
     MAURSQLiteLocationDAO* locationDAO = [MAURSQLiteLocationDAO sharedInstance];

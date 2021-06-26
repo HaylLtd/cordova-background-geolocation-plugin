@@ -227,6 +227,20 @@ static NSString * const TAG = @"CDVBackgroundGeolocation";
     }];
 }
 
+- (void) getValidLocationsAndDelete:(CDVInvokedUrlCommand*)command
+{
+    NSLog(@"%@ #%@", TAG, @"getValidLocationsAndDelete");
+    [self.commandDelegate runInBackground:^{
+        NSArray *locations = [facade getValidLocationsAndDelete];
+        NSMutableArray* dictionaryLocations = [[NSMutableArray alloc] initWithCapacity:[locations count]];
+        for (MAURLocation* location in locations) {
+            [dictionaryLocations addObject:[location toDictionaryWithId]];
+        }
+        CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:dictionaryLocations];
+        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+    }];
+}
+
 - (void) deleteLocation:(CDVInvokedUrlCommand*)command
 {
     NSLog(@"%@ #%@", TAG, @"deleteLocation");

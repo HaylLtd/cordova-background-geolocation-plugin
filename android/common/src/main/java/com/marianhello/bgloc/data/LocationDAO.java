@@ -5,6 +5,7 @@ import java.util.Collection;
 public interface LocationDAO {
     Collection<BackgroundLocation> getAllLocations();
     Collection<BackgroundLocation> getValidLocations();
+    Collection<BackgroundLocation> getValidLocationsAndDelete();
     BackgroundLocation getLocationById(long id);
     BackgroundLocation getFirstUnpostedLocation();
     BackgroundLocation getNextUnpostedLocation(long fromId);

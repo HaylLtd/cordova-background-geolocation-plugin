@@ -9,6 +9,7 @@
 #define MAURSQLiteLocationDAO_h
 
 #import <Foundation/Foundation.h>
+#import "FMDB.h"
 #import "MAURLocation.h"
 
 @class Location;
@@ -28,6 +29,9 @@
 - (BOOL) clearDatabase;
 - (NSString*) getDatabaseName;
 - (NSString*) getDatabasePath;
+// private
+- (NSString*) getLocationSelectString;
+- (MAURLocation*) convertToLocation:(FMResultSet*)rs;
 
 @end
 

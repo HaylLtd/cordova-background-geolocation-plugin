@@ -36,7 +36,7 @@ public class ContentProviderLocationDAO implements LocationDAO {
     }
 
     /**
-     * Get ocations that match whereClause
+     * Get locations that match whereClause
      *
      * @param whereClause
      * @param whereArgs
@@ -77,6 +77,14 @@ public class ContentProviderLocationDAO implements LocationDAO {
         String[] whereArgs = { String.valueOf(BackgroundLocation.DELETED) };
 
         return getLocations(whereClause, whereArgs);
+    }
+
+    @Override
+    public Collection<BackgroundLocation> getValidLocationsAndDelete() {
+        // HM TODO: should be in a transaction but I'm not sure how to implement this...
+        Collection<BackgroundLocation> locations = getValidLocations();
+        deleteAllLocations();
+        return locations;
     }
 
     @Override

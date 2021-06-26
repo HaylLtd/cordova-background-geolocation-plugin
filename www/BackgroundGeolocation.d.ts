@@ -597,6 +597,17 @@ export interface BackgroundGeolocationPlugin {
     fail?: (error: BackgroundGeolocationError) => void
   ): Promise<Location[]>;
 
+    /**
+   * Method will return locations which have not yet been posted to server and delete to avoid getting them again.
+   * Platform: iOS, Android
+   * @param success
+   * @param fail
+   */
+  getValidLocationsAndDelete(
+    success?: (location: Location[]) => void,
+    fail?: (error: BackgroundGeolocationError) => void
+  ): Promise<Location[]>;
+
   /**
    * Delete location by locationId.
    *
