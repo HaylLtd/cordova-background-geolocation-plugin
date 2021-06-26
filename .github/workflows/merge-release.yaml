@@ -1,0 +1,20 @@
+# This workflow automatically merges the develp branch into the stable
+# branch when creating a release
+# Created by RaddishIoW
+name: Merge release into stable branch
+on:
+  release:
+    types: [created]
+jobs:
+  merge-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Merge develop -> stable
+        uses: devmasx/merge-branch@v1.3.1
+        with:
+          type: now
+          from_branch: develop
+          target_branch: stable
+          github_token: ${{ github.token }}
