@@ -1,10 +1,8 @@
 package com.marianhello.bgloc.data;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
-import com.marianhello.bgloc.data.BackgroundLocation;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public interface LocationTransform
 {

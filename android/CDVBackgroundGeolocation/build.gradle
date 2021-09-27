@@ -6,7 +6,7 @@ android {
     buildToolsVersion project.ext.getBuildToolsVersion()
 
     defaultConfig {
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         minSdkVersion project.ext.getMinSdkVersion()
         targetSdkVersion project.ext.getTargetSdkVersion()
         versionCode 1

@@ -64,7 +64,7 @@ android {
         resValue "string", resourcePrefix + "account_name", 'Locations'
         resValue "string", resourcePrefix + "account_type", accountPrefix + '.account'
         resValue "string", resourcePrefix + "content_authority", accountPrefix + '.provider'
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         minSdkVersion project.ext.getMinSdkVersion()
         versionCode 1
         versionName "1.0"

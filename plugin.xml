@@ -25,7 +25,6 @@
     <!-- android -->
     <platform name="android">
         <preference name="GOOGLE_PLAY_SERVICES_VERSION" default="11+"/>
-        <preference name="ANDROID_SUPPORT_LIBRARY_VERSION" default="26+"/>
         <preference name="ICON" default="@mipmap/ic_launcher" />
         <preference name="SMALL_ICON" default="@mipmap/ic_launcher" />
         <preference name="ACCOUNT_NAME" default="@string/app_name" />
@@ -34,8 +33,8 @@
         <preference name="CONTENT_AUTHORITY" default="$PACKAGE_NAME" />
 
         <framework src="com.google.android.gms:play-services-location:$GOOGLE_PLAY_SERVICES_VERSION" />
-        <framework src="com.android.support:support-v4:$ANDROID_SUPPORT_LIBRARY_VERSION" />
-        <framework src="com.android.support:appcompat-v7:$ANDROID_SUPPORT_LIBRARY_VERSION" />
+        <framework src="androidx.core:core:1.1.0" />
+        <framework src="androidx.appcompat:appcompat:1.1.0" />
         <framework src="android/dependencies.gradle" custom="true" type="gradleReference"/>
         <!-- Generated with gen_sources.sh @ 2019-09-24 08:28:46 -->
         <source-file src="android/CDVBackgroundGeolocation/src/main/java/com/evgenii/jsevaluator/HandlerWrapper.java" target-dir="src/com/evgenii/jsevaluator" />

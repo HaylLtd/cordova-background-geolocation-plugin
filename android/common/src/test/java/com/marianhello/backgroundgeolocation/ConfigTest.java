@@ -1,6 +1,6 @@
 package com.marianhello.backgroundgeolocation;
 
-import android.support.test.filters.SmallTest;
+import androidx.test.filters.SmallTest;
 
 import com.marianhello.bgloc.Config;
 import com.marianhello.bgloc.data.ArrayListLocationTemplate;

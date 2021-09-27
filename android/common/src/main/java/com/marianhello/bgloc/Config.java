@@ -12,7 +12,7 @@ package com.marianhello.bgloc;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.marianhello.bgloc.data.AbstractLocationTemplate;
 import com.marianhello.bgloc.data.LocationTemplate;
