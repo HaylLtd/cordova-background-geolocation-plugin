@@ -26,6 +26,8 @@ The NPM package can be found at [cordova-background-geolocation-plugin](https://
 
 ### Installing the plugin
 
+**Note:** for non AndroidX project please use version 1.x of this plugin. Version 2.x and on will support AndroidX.
+
 ```bash
 cordova plugin add cordova-background-geolocation-plugin
 ```
