@@ -2,7 +2,7 @@ name: changelog-generator
 
 on:
   push:
-    branches: [ develop ]
+    branches: [ develop, stable ]
 
 jobs:
   generate_changelog:

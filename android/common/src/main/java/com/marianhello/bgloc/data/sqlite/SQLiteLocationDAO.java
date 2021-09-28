@@ -76,6 +76,15 @@ public class SQLiteLocationDAO implements LocationDAO {
     return getLocations(whereClause, whereArgs);
   }
 
+  public Collection<BackgroundLocation> getValidLocationsAndDelete() {
+    db.beginTransactionNonExclusive();
+    Collection<BackgroundLocation> locations = getValidLocations();
+    deleteAllLocations();
+    db.setTransactionSuccessful();
+    db.endTransaction();
+    return locations;
+  }
+
   public BackgroundLocation getLocationById(long id) {
     String[] columns = queryColumns();
     String whereClause = LocationEntry._ID + " = ?";

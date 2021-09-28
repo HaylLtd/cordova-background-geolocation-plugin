@@ -32,6 +32,7 @@
 - (MAURLocation*)getStationaryLocation;
 - (NSArray<MAURLocation*>*) getLocations;
 - (NSArray<MAURLocation*>*) getValidLocations;
+- (NSArray<MAURLocation*>*) getValidLocationsAndDelete;
 - (BOOL) deleteLocation:(NSNumber*)locationId error:(NSError * __autoreleasing *)outError;
 - (BOOL) deleteAllLocations:(NSError * __autoreleasing *)outError;
 - (MAURLocation*)getCurrentLocation:(int)timeout maximumAge:(long)maximumAge

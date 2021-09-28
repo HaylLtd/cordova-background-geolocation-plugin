@@ -147,6 +147,12 @@ var BackgroundGeolocation = {
       'getValidLocations');
   },
 
+  getValidLocationsAndDelete: function (success, failure) {
+    return execWithPromise(success, 
+      failure,
+      'getValidLocationsAndDelete');
+  },
+
   deleteLocation: function (locationId, success, failure) {
     return execWithPromise(success,
       failure,

@@ -281,6 +281,11 @@ public class BackgroundGeolocationFacade {
         return dao.getValidLocations();
     }
 
+    public Collection<BackgroundLocation> getValidLocationsAndDelete() {
+        LocationDAO dao = DAOFactory.createLocationDAO(getContext());
+        return dao.getValidLocationsAndDelete();
+    }
+
     public BackgroundLocation getStationaryLocation() {
         return mStationaryLocation;
     }
