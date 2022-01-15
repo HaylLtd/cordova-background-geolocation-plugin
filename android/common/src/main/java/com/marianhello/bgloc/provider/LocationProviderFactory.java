@@ -12,7 +12,6 @@ package com.marianhello.bgloc.provider;
 import android.content.Context;
 
 import com.marianhello.bgloc.Config;
-import com.tenforwardconsulting.bgloc.DistanceFilterLocationProvider;
 
 import java.lang.IllegalArgumentException;
 

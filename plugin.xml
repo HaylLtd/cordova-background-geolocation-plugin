@@ -88,6 +88,7 @@
         <source-file src="android/common/src/main/java/com/marianhello/bgloc/PostLocationTask.java" target-dir="src/com/marianhello/bgloc" />
         <source-file src="android/common/src/main/java/com/marianhello/bgloc/provider/AbstractLocationProvider.java" target-dir="src/com/marianhello/bgloc/provider" />
         <source-file src="android/common/src/main/java/com/marianhello/bgloc/provider/ActivityRecognitionLocationProvider.java" target-dir="src/com/marianhello/bgloc/provider" />
+        <source-file src="android/common/src/main/java/com/marianhello/bgloc/provider/DistanceFilterLocationProvider.java" target-dir="src/com/marianhello/bgloc/provider" />
         <source-file src="android/common/src/main/java/com/marianhello/bgloc/provider/LocationProviderFactory.java" target-dir="src/com/marianhello/bgloc/provider" />
         <source-file src="android/common/src/main/java/com/marianhello/bgloc/provider/LocationProvider.java" target-dir="src/com/marianhello/bgloc/provider" />
         <source-file src="android/common/src/main/java/com/marianhello/bgloc/provider/ProviderDelegate.java" target-dir="src/com/marianhello/bgloc/provider" />
@@ -114,7 +115,6 @@
         <source-file src="android/common/src/main/java/com/marianhello/utils/Convert.java" target-dir="src/com/marianhello/utils" />
         <source-file src="android/common/src/main/java/com/marianhello/utils/TextUtils.java" target-dir="src/com/marianhello/utils" />
         <source-file src="android/common/src/main/java/com/marianhello/utils/ToneGenerator.java" target-dir="src/com/marianhello/utils" />
-        <source-file src="android/common/src/main/java/com/tenforwardconsulting/bgloc/DistanceFilterLocationProvider.java" target-dir="src/com/tenforwardconsulting/bgloc" />
         <source-file src="android/common/src/main/java/org/apache/commons/io/Charsets.java" target-dir="src/org/apache/commons/io" />
         <source-file src="android/common/src/main/java/org/apache/commons/io/input/ReversedLinesFileReader.java" target-dir="src/org/apache/commons/io/input" />
         <source-file src="android/common/src/main/java/org/chromium/content/browser/ThreadUtils.java" target-dir="src/org/chromium/content/browser" />

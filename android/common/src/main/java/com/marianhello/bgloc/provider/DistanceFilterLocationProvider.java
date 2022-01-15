@@ -9,7 +9,7 @@ Differences to original version:
 1. location is not persisted to db anymore, but broadcasted using intents instead
 */
 
-package com.tenforwardconsulting.bgloc;
+package com.marianhello.bgloc.provider;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
