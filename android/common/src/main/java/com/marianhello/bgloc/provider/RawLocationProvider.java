@@ -46,7 +46,9 @@ public class RawLocationProvider extends AbstractLocationProvider implements Loc
         criteria.setPowerRequirement(Criteria.POWER_HIGH);
 
         try {
-            locationManager.requestLocationUpdates(locationManager.getBestProvider(criteria, true), mConfig.getInterval(), mConfig.getDistanceFilter(), this);
+            String provider = locationManager.getBestProvider(criteria, true);
+            logger.info("Requesting location updates from provider {}", provider);
+            locationManager.requestLocationUpdates(provider, mConfig.getInterval(), mConfig.getDistanceFilter(), this);
             isStarted = true;
         } catch (SecurityException e) {
             logger.error("Security exception: {}", e.getMessage());

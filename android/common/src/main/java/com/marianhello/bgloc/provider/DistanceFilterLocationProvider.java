@@ -198,11 +198,14 @@ public class DistanceFilterLocationProvider extends AbstractLocationProvider imp
                 List<String> matchingProviders = locationManager.getAllProviders();
                 for (String provider: matchingProviders) {
                     if (provider != LocationManager.PASSIVE_PROVIDER) {
+                        logger.info("Requesting location updates from provider {}", provider);
                         locationManager.requestLocationUpdates(provider, 0, 0, this);
                     }
                 }
             } else {
-                locationManager.requestLocationUpdates(locationManager.getBestProvider(criteria, true), mConfig.getInterval(), scaledDistanceFilter, this);
+                String provider = locationManager.getBestProvider(criteria, true);
+            logger.info("Requesting location updates from provider {}", provider);
+                locationManager.requestLocationUpdates(provider, mConfig.getInterval(), scaledDistanceFilter, this);
             }
         } catch (SecurityException e) {
             logger.error("Security exception: {}", e.getMessage());
