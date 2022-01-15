@@ -36,19 +36,19 @@ public class RawLocationProvider extends AbstractLocationProvider implements Loc
             return;
         }
 
-        Criteria criteria = new Criteria();
-        criteria.setAltitudeRequired(false);
-        criteria.setBearingRequired(false);
-        criteria.setSpeedRequired(true);
-        criteria.setCostAllowed(true);
-        criteria.setAccuracy(Criteria.ACCURACY_FINE);
-        criteria.setHorizontalAccuracy(translateDesiredAccuracy(mConfig.getDesiredAccuracy()));
-        criteria.setPowerRequirement(Criteria.POWER_HIGH);
+        //Criteria criteria = new Criteria();
+        //criteria.setAltitudeRequired(false);
+        //criteria.setBearingRequired(false);
+        //criteria.setSpeedRequired(true);
+        //criteria.setCostAllowed(true);
+        //criteria.setAccuracy(Criteria.ACCURACY_FINE);
+        //criteria.setHorizontalAccuracy(translateDesiredAccuracy(mConfig.getDesiredAccuracy()));
+        //criteria.setPowerRequirement(Criteria.POWER_HIGH);
 
         try {
-            String provider = locationManager.getBestProvider(criteria, true);
-            logger.info("Requesting location updates from provider {}", provider);
-            locationManager.requestLocationUpdates(provider, mConfig.getInterval(), mConfig.getDistanceFilter(), this);
+            //String provider = locationManager.getBestProvider(criteria, true);
+            //logger.info("Requesting location updates from provider {}", provider);
+            locationManager.requestLocationUpdates("gps", mConfig.getInterval(), mConfig.getDistanceFilter(), this);
             isStarted = true;
         } catch (SecurityException e) {
             logger.error("Security exception: {}", e.getMessage());
