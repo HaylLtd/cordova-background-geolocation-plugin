@@ -51,7 +51,7 @@ public class RawLocationProvider extends AbstractLocationProvider implements Loc
         }
         try {
             logger.info("Requesting location updates from provider {}", provider);
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, mConfig.getInterval(), mConfig.getDistanceFilter(), this);
+            locationManager.requestLocationUpdates(provider, mConfig.getInterval(), mConfig.getDistanceFilter(), this);
             isStarted = true;
         } catch (SecurityException e) {
             logger.error("Security exception: {}", e.getMessage());
