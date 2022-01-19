@@ -5,6 +5,7 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.marianhello.bgloc.Config;
@@ -35,20 +36,22 @@ public class RawLocationProvider extends AbstractLocationProvider implements Loc
         if (isStarted) {
             return;
         }
-
-        //Criteria criteria = new Criteria();
-        //criteria.setAltitudeRequired(false);
-        //criteria.setBearingRequired(false);
-        //criteria.setSpeedRequired(true);
-        //criteria.setCostAllowed(true);
-        //criteria.setAccuracy(Criteria.ACCURACY_FINE);
-        //criteria.setHorizontalAccuracy(translateDesiredAccuracy(mConfig.getDesiredAccuracy()));
-        //criteria.setPowerRequirement(Criteria.POWER_HIGH);
-
+        String provider = LocationManager.GPS_PROVIDER;
+        if (!locationManager.getAllProviders().contains(LocationManager.GPS_PROVIDER) ||
+                Build.VERSION.SDK_INT <= 30) {
+            Criteria criteria = new Criteria();
+            criteria.setAltitudeRequired(false);
+            criteria.setBearingRequired(false);
+            criteria.setSpeedRequired(true);
+            criteria.setCostAllowed(true);
+            criteria.setAccuracy(Criteria.ACCURACY_FINE);
+            criteria.setHorizontalAccuracy(translateDesiredAccuracy(mConfig.getDesiredAccuracy()));
+            criteria.setPowerRequirement(Criteria.POWER_HIGH);
+            provider = locationManager.getBestProvider(criteria, true);
+        }
         try {
-            //String provider = locationManager.getBestProvider(criteria, true);
-            //logger.info("Requesting location updates from provider {}", provider);
-            locationManager.requestLocationUpdates("gps", mConfig.getInterval(), mConfig.getDistanceFilter(), this);
+            logger.info("Requesting location updates from provider {}", provider);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, mConfig.getInterval(), mConfig.getDistanceFilter(), this);
             isStarted = true;
         } catch (SecurityException e) {
             logger.error("Security exception: {}", e.getMessage());

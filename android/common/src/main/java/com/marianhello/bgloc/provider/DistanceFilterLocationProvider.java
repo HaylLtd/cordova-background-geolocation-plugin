@@ -21,6 +21,7 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.marianhello.bgloc.Config;
@@ -204,7 +205,11 @@ public class DistanceFilterLocationProvider extends AbstractLocationProvider imp
                 }
             } else {
                 String provider = locationManager.getBestProvider(criteria, true);
-            logger.info("Requesting location updates from provider {}", provider);
+                if (locationManager.getAllProviders().contains(LocationManager.GPS_PROVIDER) &&
+                        Build.VERSION.SDK_INT > 30) {
+                    provider = LocationManager.GPS_PROVIDER;
+                }
+                logger.info("Requesting location updates from provider {}", provider);
                 locationManager.requestLocationUpdates(provider, mConfig.getInterval(), scaledDistanceFilter, this);
             }
         } catch (SecurityException e) {
