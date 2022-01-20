@@ -9,7 +9,7 @@ Differences to original version:
 1. location is not persisted to db anymore, but broadcasted using intents instead
 */
 
-package com.tenforwardconsulting.bgloc;
+package com.marianhello.bgloc.provider;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -21,6 +21,7 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.marianhello.bgloc.Config;
@@ -198,11 +199,18 @@ public class DistanceFilterLocationProvider extends AbstractLocationProvider imp
                 List<String> matchingProviders = locationManager.getAllProviders();
                 for (String provider: matchingProviders) {
                     if (provider != LocationManager.PASSIVE_PROVIDER) {
+                        logger.info("Requesting location updates from provider {}", provider);
                         locationManager.requestLocationUpdates(provider, 0, 0, this);
                     }
                 }
             } else {
-                locationManager.requestLocationUpdates(locationManager.getBestProvider(criteria, true), mConfig.getInterval(), scaledDistanceFilter, this);
+                String provider = locationManager.getBestProvider(criteria, true);
+                if (locationManager.getAllProviders().contains(LocationManager.GPS_PROVIDER) &&
+                        Build.VERSION.SDK_INT > 30) {
+                    provider = LocationManager.GPS_PROVIDER;
+                }
+                logger.info("Requesting location updates from provider {}", provider);
+                locationManager.requestLocationUpdates(provider, mConfig.getInterval(), scaledDistanceFilter, this);
             }
         } catch (SecurityException e) {
             logger.error("Security exception: {}", e.getMessage());
