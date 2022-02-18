@@ -362,13 +362,13 @@
 
 - (CLActivityType) decodeActivityType
 {
-    if ([activityType caseInsensitiveCompare:@"AutomotiveNavigation"]) {
+    if ([activityType caseInsensitiveCompare:@"AutomotiveNavigation"] == NSOrderedSame) {
         return CLActivityTypeAutomotiveNavigation;
     }
-    if ([activityType caseInsensitiveCompare:@"OtherNavigation"]) {
+    if ([activityType caseInsensitiveCompare:@"OtherNavigation"] == NSOrderedSame) {
         return CLActivityTypeOtherNavigation;
     }
-    if ([activityType caseInsensitiveCompare:@"Fitness"]) {
+    if ([activityType caseInsensitiveCompare:@"Fitness"] == NSOrderedSame) {
         return CLActivityTypeFitness;
     }
 
