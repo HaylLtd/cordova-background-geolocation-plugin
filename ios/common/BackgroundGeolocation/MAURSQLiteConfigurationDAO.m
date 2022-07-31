@@ -6,7 +6,7 @@
 //  Copyright © 2017 mauron85. All rights reserved.
 //
 
-#import "sqlite3.h"
+#import <sqlite3.h>
 #import <CoreLocation/CoreLocation.h>
 #import "MAURSQLiteHelper.h"
 #import "MAURGeolocationOpenHelper.h"
