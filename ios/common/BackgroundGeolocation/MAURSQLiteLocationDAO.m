@@ -5,7 +5,7 @@
 //  Created by Marian Hello on 10/06/16.
 //
 
-#import "sqlite3.h"
+#import <sqlite3.h>
 #import <CoreLocation/CoreLocation.h>
 #import "MAURSQLiteHelper.h"
 #import "MAURGeolocationOpenHelper.h"
