@@ -2,6 +2,37 @@
 
 ## [Unreleased](https://github.com/HaylLtd/cordova-background-geolocation-plugin/tree/HEAD)
 
+**Implemented enhancements:**
+
+- Remove legacy org.apache.http library references [\#56](https://github.com/HaylLtd/cordova-background-geolocation-plugin/issues/56)
+- Consider removing SQLiteLocationDAO.java [\#39](https://github.com/HaylLtd/cordova-background-geolocation-plugin/issues/39)
+
+**Fixed bugs:**
+
+- Android 12 issues [\#59](https://github.com/HaylLtd/cordova-background-geolocation-plugin/issues/59)
+
+**Closed issues:**
+
+- Installation not recognized [\#93](https://github.com/HaylLtd/cordova-background-geolocation-plugin/issues/93)
+- Stop the beep sound on Android [\#89](https://github.com/HaylLtd/cordova-background-geolocation-plugin/issues/89)
+- Not working with cordova-plugin-mobile-ocr [\#84](https://github.com/HaylLtd/cordova-background-geolocation-plugin/issues/84)
+- after installing this plugin, the app exits automatically \(force close\) [\#83](https://github.com/HaylLtd/cordova-background-geolocation-plugin/issues/83)
+- Error in plugin\_bgloc\_content\_authority [\#80](https://github.com/HaylLtd/cordova-background-geolocation-plugin/issues/80)
+- Fix Android Export in AuthenticatorService [\#76](https://github.com/HaylLtd/cordova-background-geolocation-plugin/issues/76)
+- Android notification [\#75](https://github.com/HaylLtd/cordova-background-geolocation-plugin/issues/75)
+- Pluggin dont work [\#73](https://github.com/HaylLtd/cordova-background-geolocation-plugin/issues/73)
+- Request permission full prompt [\#71](https://github.com/HaylLtd/cordova-background-geolocation-plugin/issues/71)
+- Ionic Capacitor Problem [\#55](https://github.com/HaylLtd/cordova-background-geolocation-plugin/issues/55)
+- Issue with firebase plugin compatibility [\#52](https://github.com/HaylLtd/cordova-background-geolocation-plugin/issues/52)
+- App cashes on Android 10 [\#48](https://github.com/HaylLtd/cordova-background-geolocation-plugin/issues/48)
+- Clearer documentation of what this plugin provides or does better than Transistorsoft [\#31](https://github.com/HaylLtd/cordova-background-geolocation-plugin/issues/31)
+
+**Merged pull requests:**
+
+- Added android:exported tag for authenticator service [\#94](https://github.com/HaylLtd/cordova-background-geolocation-plugin/pull/94) ([cgeorg](https://github.com/cgeorg))
+
+## [v2.0.4](https://github.com/HaylLtd/cordova-background-geolocation-plugin/tree/v2.0.4) (2022-03-16)
+
 **Closed issues:**
 
 - plugin.xml version does not match package.json version [\#69](https://github.com/HaylLtd/cordova-background-geolocation-plugin/issues/69)
@@ -25,10 +56,6 @@
 **Implemented enhancements:**
 
 - Support AndroidX [\#15](https://github.com/HaylLtd/cordova-background-geolocation-plugin/issues/15)
-
-**Fixed bugs:**
-
-- Android 12 issues [\#59](https://github.com/HaylLtd/cordova-background-geolocation-plugin/issues/59)
 
 **Documentation:**
 
