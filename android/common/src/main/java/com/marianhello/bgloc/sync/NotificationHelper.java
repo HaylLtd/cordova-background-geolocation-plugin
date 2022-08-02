@@ -62,7 +62,11 @@ public class NotificationHelper {
                 builder.setSmallIcon(android.R.drawable.ic_menu_mylocation);
             }
             if (largeIcon != null && !largeIcon.isEmpty()) {
-                builder.setLargeIcon(BitmapFactory.decodeResource(appContext.getResources(), mResolver.getDrawable(largeIcon)));
+                int largeIconId = mResolver.getDrawable(largeIcon);
+                if (largeIconId == 0) {
+                    logger.warn("The resource " + largeIcon + " was not found in the drawable folder. Please include it when building the app.");
+                }
+                builder.setLargeIcon(BitmapFactory.decodeResource(appContext.getResources(), largeIconId));
             }
             if (color != null && !color.isEmpty()) {
                 builder.setColor(this.parseNotificationIconColor(color));
@@ -74,7 +78,10 @@ public class NotificationHelper {
             if (launchIntent != null) {
                 // NOTICE: testing apps might not have registered launch intent
                 launchIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                PendingIntent contentIntent = PendingIntent.getActivity(appContext, 0, launchIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+                int flags = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
+                        ? PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE
+                        : PendingIntent.FLAG_CANCEL_CURRENT;
+                PendingIntent contentIntent = PendingIntent.getActivity(appContext, 0, launchIntent, flags);
                 builder.setContentIntent(contentIntent);
             }
 
