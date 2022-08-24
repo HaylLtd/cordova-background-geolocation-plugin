@@ -286,6 +286,9 @@ public class LocationServiceImpl extends Service implements ProviderDelegate, Lo
         if (containsCommand) {
             LocationServiceIntentBuilder.Command cmd = getCommand(intent);
             processCommand(cmd.getId(), cmd.getArgument());
+        } else {
+            // Could be a BOOT-event, or the OS just randomly restarted the service...
+            startForegroundService();
         }
 
         if (containsMessage(intent)) {
