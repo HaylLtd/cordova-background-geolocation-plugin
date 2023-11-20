@@ -20,6 +20,7 @@ import android.text.TextUtils;
 
 import com.github.jparkie.promise.Promise;
 import com.intentfilter.androidpermissions.PermissionManager;
+import com.intentfilter.androidpermissions.models.DeniedPermissions;
 import com.marianhello.bgloc.data.BackgroundActivity;
 import com.marianhello.bgloc.data.BackgroundLocation;
 import com.marianhello.bgloc.data.ConfigurationDAO;
@@ -226,7 +227,7 @@ public class BackgroundGeolocationFacade {
             }
 
             @Override
-            public void onPermissionDenied() {
+            public void onPermissionDenied(DeniedPermissions deniedPermissions) {
                 logger.info("User denied requested permissions");
                 if (mDelegate != null) {
                     mDelegate.onAuthorizationChanged(BackgroundGeolocationFacade.AUTHORIZATION_DENIED);

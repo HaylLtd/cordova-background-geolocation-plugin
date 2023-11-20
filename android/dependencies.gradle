@@ -3,9 +3,7 @@ dependencies {
     implementation 'com.github.tony19:logback-android:1.1.1-9'
     implementation 'org.slf4j:slf4j-api:1.7.21'
     // android-permissions
-    implementation('io.github.nishkarsh:android-permissions:0.1.7') {
-        exclude group: 'com.android.support', module: 'appcompat-v7'
-    }
+    implementation 'io.github.nishkarsh:android-permissions:2.1.8'
     // promises
     implementation 'com.github.jparkie:promise:1.0.3'
 }
