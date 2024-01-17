@@ -19,6 +19,7 @@ public final class SQLiteLocationContract {
         public static final String COLUMN_NAME_NULLABLE = "NULLHACK";
         public static final String COLUMN_NAME_TIME = "time";
         public static final String COLUMN_NAME_ACCURACY = "accuracy";
+        public static final String COLUMN_NAME_VERTICAL_ACCURACY = "vertical_accuracy";
         public static final String COLUMN_NAME_SPEED = "speed";
         public static final String COLUMN_NAME_BEARING = "bearing";
         public static final String COLUMN_NAME_ALTITUDE = "altitude";
@@ -26,6 +27,7 @@ public final class SQLiteLocationContract {
         public static final String COLUMN_NAME_LONGITUDE = "longitude";
         public static final String COLUMN_NAME_RADIUS = "radius";
         public static final String COLUMN_NAME_HAS_ACCURACY = "has_accuracy";
+        public static final String COLUMN_NAME_HAS_VERTICAL_ACCURACY = "has_vertical_accuracy";
         public static final String COLUMN_NAME_HAS_SPEED = "has_speed";
         public static final String COLUMN_NAME_HAS_BEARING = "has_bearing";
         public static final String COLUMN_NAME_HAS_ALTITUDE = "has_altitude";
@@ -41,6 +43,7 @@ public final class SQLiteLocationContract {
                         LocationEntry._ID + " INTEGER PRIMARY KEY," +
                         LocationEntry.COLUMN_NAME_TIME + INTEGER_TYPE + COMMA_SEP +
                         LocationEntry.COLUMN_NAME_ACCURACY + REAL_TYPE + COMMA_SEP +
+                        LocationEntry.COLUMN_NAME_VERTICAL_ACCURACY + REAL_TYPE + COMMA_SEP +
                         LocationEntry.COLUMN_NAME_SPEED + REAL_TYPE + COMMA_SEP +
                         LocationEntry.COLUMN_NAME_BEARING + REAL_TYPE + COMMA_SEP +
                         LocationEntry.COLUMN_NAME_ALTITUDE + REAL_TYPE + COMMA_SEP +
@@ -48,6 +51,7 @@ public final class SQLiteLocationContract {
                         LocationEntry.COLUMN_NAME_LONGITUDE + REAL_TYPE + COMMA_SEP +
                         LocationEntry.COLUMN_NAME_RADIUS + REAL_TYPE + COMMA_SEP +
                         LocationEntry.COLUMN_NAME_HAS_ACCURACY + INTEGER_TYPE + COMMA_SEP +
+                        LocationEntry.COLUMN_NAME_HAS_VERTICAL_ACCURACY + INTEGER_TYPE + COMMA_SEP +
                         LocationEntry.COLUMN_NAME_HAS_SPEED + INTEGER_TYPE + COMMA_SEP +
                         LocationEntry.COLUMN_NAME_HAS_BEARING + INTEGER_TYPE + COMMA_SEP +
                         LocationEntry.COLUMN_NAME_HAS_ALTITUDE + INTEGER_TYPE + COMMA_SEP +
@@ -85,6 +89,7 @@ public final class SQLiteLocationContract {
                 _ID,
                 COLUMN_NAME_TIME,
                 COLUMN_NAME_ACCURACY,
+                COLUMN_NAME_VERTICAL_ACCURACY,
                 COLUMN_NAME_SPEED,
                 COLUMN_NAME_BEARING,
                 COLUMN_NAME_ALTITUDE,
@@ -92,6 +97,7 @@ public final class SQLiteLocationContract {
                 COLUMN_NAME_LONGITUDE,
                 COLUMN_NAME_RADIUS,
                 COLUMN_NAME_HAS_ACCURACY,
+                COLUMN_NAME_HAS_VERTICAL_ACCURACY,
                 COLUMN_NAME_HAS_SPEED,
                 COLUMN_NAME_HAS_BEARING,
                 COLUMN_NAME_HAS_ALTITUDE,

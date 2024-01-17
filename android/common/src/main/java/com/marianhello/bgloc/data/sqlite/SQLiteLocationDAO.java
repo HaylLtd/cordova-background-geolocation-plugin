@@ -284,6 +284,7 @@ public class SQLiteLocationDAO implements LocationDAO {
             .append(LocationEntry.COLUMN_NAME_PROVIDER).append("= ?,")
             .append(LocationEntry.COLUMN_NAME_TIME).append("= ?,")
             .append(LocationEntry.COLUMN_NAME_ACCURACY).append("= ?,")
+            .append(LocationEntry.COLUMN_NAME_VERTICAL_ACCURACY).append("= ?,")
             .append(LocationEntry.COLUMN_NAME_SPEED).append("= ?,")
             .append(LocationEntry.COLUMN_NAME_BEARING).append("= ?,")
             .append(LocationEntry.COLUMN_NAME_ALTITUDE).append("= ?,")
@@ -291,6 +292,7 @@ public class SQLiteLocationDAO implements LocationDAO {
             .append(LocationEntry.COLUMN_NAME_LATITUDE).append("= ?,")
             .append(LocationEntry.COLUMN_NAME_LONGITUDE).append("= ?,")
             .append(LocationEntry.COLUMN_NAME_HAS_ACCURACY).append("= ?,")
+            .append(LocationEntry.COLUMN_NAME_HAS_VERTICAL_ACCURACY).append("= ?,")
             .append(LocationEntry.COLUMN_NAME_HAS_SPEED).append("= ?,")
             .append(LocationEntry.COLUMN_NAME_HAS_BEARING).append("= ?,")
             .append(LocationEntry.COLUMN_NAME_HAS_ALTITUDE).append("= ?,")
@@ -306,6 +308,7 @@ public class SQLiteLocationDAO implements LocationDAO {
             location.getProvider(),
             location.getTime(),
             location.getAccuracy(),
+            location.getVerticalAccuracy(),
             location.getSpeed(),
             location.getBearing(),
             location.getAltitude(),
@@ -313,6 +316,7 @@ public class SQLiteLocationDAO implements LocationDAO {
             location.getLatitude(),
             location.getLongitude(),
             location.hasAccuracy() ? 1 : 0,
+            location.hasVerticalAccuracy() ? 1 : 0,
             location.hasSpeed() ? 1 : 0,
             location.hasBearing() ? 1 : 0,
             location.hasAltitude() ? 1 : 0,
@@ -420,6 +424,9 @@ public class SQLiteLocationDAO implements LocationDAO {
     if (c.getInt(c.getColumnIndex(LocationEntry.COLUMN_NAME_HAS_ACCURACY)) == 1) {
       l.setAccuracy(c.getFloat(c.getColumnIndex(LocationEntry.COLUMN_NAME_ACCURACY)));
     }
+    if (c.getInt(c.getColumnIndex(LocationEntry.COLUMN_NAME_HAS_VERTICAL_ACCURACY)) == 1) {
+        l.setVerticalAccuracy(c.getFloat(c.getColumnIndex(LocationEntry.COLUMN_NAME_VERTICAL_ACCURACY)));
+    }
     if (c.getInt(c.getColumnIndex(LocationEntry.COLUMN_NAME_HAS_SPEED)) == 1) {
       l.setSpeed(c.getFloat(c.getColumnIndex(LocationEntry.COLUMN_NAME_SPEED)));
     }
@@ -448,6 +455,7 @@ public class SQLiteLocationDAO implements LocationDAO {
     values.put(LocationEntry.COLUMN_NAME_PROVIDER, l.getProvider());
     values.put(LocationEntry.COLUMN_NAME_TIME, l.getTime());
     values.put(LocationEntry.COLUMN_NAME_ACCURACY, l.getAccuracy());
+    values.put(LocationEntry.COLUMN_NAME_VERTICAL_ACCURACY, l.getVerticalAccuracy());
     values.put(LocationEntry.COLUMN_NAME_SPEED, l.getSpeed());
     values.put(LocationEntry.COLUMN_NAME_BEARING, l.getBearing());
     values.put(LocationEntry.COLUMN_NAME_ALTITUDE, l.getAltitude());
@@ -455,6 +463,7 @@ public class SQLiteLocationDAO implements LocationDAO {
     values.put(LocationEntry.COLUMN_NAME_LATITUDE, l.getLatitude());
     values.put(LocationEntry.COLUMN_NAME_LONGITUDE, l.getLongitude());
     values.put(LocationEntry.COLUMN_NAME_HAS_ACCURACY, l.hasAccuracy() ? 1 : 0);
+    values.put(LocationEntry.COLUMN_NAME_HAS_VERTICAL_ACCURACY, l.hasVerticalAccuracy() ? 1 : 0);
     values.put(LocationEntry.COLUMN_NAME_HAS_SPEED, l.hasSpeed() ? 1 : 0);
     values.put(LocationEntry.COLUMN_NAME_HAS_BEARING, l.hasBearing() ? 1 : 0);
     values.put(LocationEntry.COLUMN_NAME_HAS_ALTITUDE, l.hasAltitude() ? 1 : 0);
@@ -473,6 +482,7 @@ public class SQLiteLocationDAO implements LocationDAO {
             LocationEntry.COLUMN_NAME_PROVIDER,
             LocationEntry.COLUMN_NAME_TIME,
             LocationEntry.COLUMN_NAME_ACCURACY,
+            LocationEntry.COLUMN_NAME_VERTICAL_ACCURACY,
             LocationEntry.COLUMN_NAME_SPEED,
             LocationEntry.COLUMN_NAME_BEARING,
             LocationEntry.COLUMN_NAME_ALTITUDE,
@@ -480,6 +490,7 @@ public class SQLiteLocationDAO implements LocationDAO {
             LocationEntry.COLUMN_NAME_LATITUDE,
             LocationEntry.COLUMN_NAME_LONGITUDE,
             LocationEntry.COLUMN_NAME_HAS_ACCURACY,
+            LocationEntry.COLUMN_NAME_HAS_VERTICAL_ACCURACY,
             LocationEntry.COLUMN_NAME_HAS_SPEED,
             LocationEntry.COLUMN_NAME_HAS_BEARING,
             LocationEntry.COLUMN_NAME_HAS_ALTITUDE,

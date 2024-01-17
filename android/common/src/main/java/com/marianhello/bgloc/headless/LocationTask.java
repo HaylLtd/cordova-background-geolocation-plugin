@@ -29,6 +29,7 @@ public abstract class LocationTask extends Task {
         params.putDouble("latitude", mLocation.getLatitude());
         params.putDouble("longitude", mLocation.getLongitude());
         if (mLocation.hasAccuracy()) params.putFloat("accuracy", mLocation.getAccuracy());
+        if (mLocation.hasVerticalAccuracy()) params.putFloat("accuracy", mLocation.getVerticalAccuracy());
         if (mLocation.hasSpeed()) params.putFloat("speed", mLocation.getSpeed());
         if (mLocation.hasAltitude()) params.putDouble("altitude", mLocation.getAltitude());
         if (mLocation.hasBearing()) params.putFloat("bearing", mLocation.getBearing());
