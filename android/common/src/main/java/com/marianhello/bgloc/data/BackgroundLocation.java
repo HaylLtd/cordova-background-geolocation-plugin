@@ -848,10 +848,10 @@ public class BackgroundLocation implements Parcelable {
         }
 
         if (hasVerticalAccuracy) {
-            s.append(String.format(" acc=%.0f", verticalAccuracy));
+            s.append(String.format(" altAcc=%.0f", verticalAccuracy));
         }
         else {
-            s.append(" acc=???");
+            s.append(" altAcc=???");
         }
 
         if (time == 0) {
