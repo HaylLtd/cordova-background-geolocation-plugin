@@ -33,6 +33,7 @@ nav_order: 3
 | `accuracy`             | `Number`  | Estimated accuracy of this location, in meters.                        |
 | `speed`                | `Number`  | Speed if it is available, in meters/second over ground.                |
 | `altitude`             | `Number`  | Altitude if available, in meters above the WGS 84 reference ellipsoid. |
+| `altitudeAccuracy`     | `Number`  | Estimated accuracy of altitude, in meters.                             |
 | `bearing`              | `Number`  | Bearing, in degrees.                                                   |
 | `isFromMockProvider`   | `Boolean` | (android only) True if location was recorded by mock provider          |
 | `mockLocationsEnabled` | `Boolean` | (android only) True if device has mock locations enabled               |
