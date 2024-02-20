@@ -50,7 +50,7 @@ public class ActivityRecognitionLocationProvider extends AbstractLocationProvide
         super.onCreate();
 
         Intent detectedActivitiesIntent = new Intent(DETECTED_ACTIVITY_UPDATE);
-        int updateCurrentFlag = android.os.Build.VERSION.SDK_INT >= 34
+        int updateCurrentFlag = android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE
                 ? PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE | PendingIntent.FLAG_ALLOW_UNSAFE_IMPLICIT_INTENT
                 : android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
                     ? PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE

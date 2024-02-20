@@ -85,13 +85,13 @@ public class DistanceFilterLocationProvider extends AbstractLocationProvider imp
         locationManager = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);
         alarmManager = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
 
-        int zeroFlag = Build.VERSION.SDK_INT >= 34
+        int zeroFlag = Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE
                 ? PendingIntent.FLAG_MUTABLE | PendingIntent.FLAG_ALLOW_UNSAFE_IMPLICIT_INTENT
                 : Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
                     ? 0 | PendingIntent.FLAG_MUTABLE
                     : 0;
 
-        int cancelCurrentFlag = Build.VERSION.SDK_INT >= 34
+        int cancelCurrentFlag = Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE
                 ? PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_MUTABLE | PendingIntent.FLAG_ALLOW_UNSAFE_IMPLICIT_INTENT
                 : Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
                     ? PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_MUTABLE
