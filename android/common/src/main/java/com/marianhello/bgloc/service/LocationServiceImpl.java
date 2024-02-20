@@ -633,7 +633,7 @@ public class LocationServiceImpl extends Service implements ProviderDelegate, Lo
 
     @Override
     public Intent registerReceiver(BroadcastReceiver receiver, IntentFilter filter) {
-        return super.registerReceiver(receiver, filter, null, mServiceHandler);
+        return super.registerReceiver(receiver, filter, null, mServiceHandler, RECEIVER_NOT_EXPORTED);
     }
 
     @Override
