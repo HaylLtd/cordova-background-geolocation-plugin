@@ -118,8 +118,8 @@ public class SQLiteOpenHelper extends android.database.sqlite.SQLiteOpenHelper {
                 alterSql.add("ALTER TABLE " + LocationEntry.TABLE_NAME +
                         " ADD COLUMN " + LocationEntry.COLUMN_NAME_HAS_VERTICAL_ACCURACY + INTEGER_TYPE);
                 alterSql.add("UPDATE " + LocationEntry.TABLE_NAME +
-                                        " SET " + LocationEntry.COLUMN_NAME_VERTICAL_ACCURACY + "= -1,"
-                                        LocationEntry.COLUMN_NAME_HAS_VERTICAL_ACCURACY + "= 0"
+                                        " SET " + LocationEntry.COLUMN_NAME_VERTICAL_ACCURACY + "= -1," +
+                                        LocationEntry.COLUMN_NAME_HAS_VERTICAL_ACCURACY + "= 0")
 
                 break; // DO NOT FORGET TO MOVE DOWN BREAK ON DB UPGRADE!!!
             default:
