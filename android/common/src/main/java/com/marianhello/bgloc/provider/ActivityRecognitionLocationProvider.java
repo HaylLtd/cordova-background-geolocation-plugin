@@ -49,10 +49,10 @@ public class ActivityRecognitionLocationProvider extends AbstractLocationProvide
     public void onCreate() {
         super.onCreate();
 
-        Intent detectedActivitiesIntent = new Intent(DETECTED_ACTIVITY_UPDATE);
-        int updateCurrentFlag = android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE
-                ? PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE | PendingIntent.FLAG_ALLOW_UNSAFE_IMPLICIT_INTENT
-                : android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
+        Intent detectedActivitiesIntent = new Intent(mContext, DetectedActivitiesReceiver.class);
+        detectedActivitiesIntent.setAction(DETECTED_ACTIVITY_UPDATE);
+
+        int updateCurrentFlag = android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
                     ? PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE
                     : PendingIntent.FLAG_UPDATE_CURRENT;
         detectedActivitiesPI = PendingIntent.getBroadcast(mContext, 9002, detectedActivitiesIntent, updateCurrentFlag);
@@ -235,7 +235,7 @@ public class ActivityRecognitionLocationProvider extends AbstractLocationProvide
         return mostLikelyActivity;
     }
 
-    private BroadcastReceiver detectedActivitiesReceiver = new BroadcastReceiver() {
+    private class DetectedActivitiesReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
             ActivityRecognitionResult result = ActivityRecognitionResult.extractResult(intent);
@@ -258,7 +258,9 @@ public class ActivityRecognitionLocationProvider extends AbstractLocationProvide
             }
             //else do nothing
         }
-    };
+    }
+
+    private BroadcastReceiver detectedActivitiesReceiver = new DetectedActivitiesReceiver();
 
     @Override
     public void onDestroy() {
