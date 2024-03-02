@@ -45,5 +45,6 @@ jobs:
                       print "    <string name=\"plugin_bgloc_account_type\">temp</string>";\
                       print "    <string name=\"plugin_bgloc_content_authority\">@string/package_name</string>"}\
                       1' android/app/src/main/res/values/strings.xml > temp.xml && mv temp.xml android/app/src/main/res/values/strings.xml
-          npx cap build android
+          cd android
+          ./gradlew assembleDebug
 
