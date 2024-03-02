@@ -25,14 +25,16 @@ jobs:
         run: npm pack
 
       - name: Create capacitor app
-        run: npm init @capacitor/app temp -- --name temp --app-id temp.com
-        run: cd temp
-        run: npm install
-        run: npm i ../*.tgz
+        run: | 
+          npm init @capacitor/app temp -- --name temp --app-id temp.com
+          cd temp
+          npm install
+          npm i ../*.tgz
 
       - name: Add platform
-        run: npm install @capacitor/android
-        run: npx cap add android
+        run: |
+          npm install @capacitor/android
+          npx cap add android
 
       - name: Build app
         run: npx cap build
