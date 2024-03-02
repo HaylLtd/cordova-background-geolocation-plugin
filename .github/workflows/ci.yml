@@ -24,19 +24,13 @@ jobs:
       - name: Create local package
         run: npm pack
 
-      - name: Create capacitor app
+      - name: Create capacitor app and build it
         run: | 
           npm init @capacitor/app temp -- --name temp --app-id temp.com
           cd temp
           npm install
           npm i ../*.tgz
-
-      - name: Add platform
-        run: |
-          pwd
           npm install @capacitor/android
           npx cap add android
-
-      - name: Build app
-        run: npx cap build
+          npx cap build
 
