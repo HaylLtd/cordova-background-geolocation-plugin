@@ -4,10 +4,13 @@
 
 **Closed issues:**
 
+- Issue in closing of the line in "SQLiteOpenHelper.java" LocationEntry - missing "\)" and ";" and possibly "+" [\#180](https://github.com/HaylLtd/cordova-background-geolocation-plugin/issues/180)
 - INSTALL\_FAILED\_MISSING\_SHARED\_LIBRARY [\#173](https://github.com/HaylLtd/cordova-background-geolocation-plugin/issues/173)
 
 **Merged pull requests:**
 
+- Add CI build [\#184](https://github.com/HaylLtd/cordova-background-geolocation-plugin/pull/184) ([HarelM](https://github.com/HarelM))
+- fix concatenate sentence [\#182](https://github.com/HaylLtd/cordova-background-geolocation-plugin/pull/182) ([jhonimaike](https://github.com/jhonimaike))
 - doc: adding altitudeAccuracy parameter [\#177](https://github.com/HaylLtd/cordova-background-geolocation-plugin/pull/177) ([Athorcis](https://github.com/Athorcis))
 - feat: add support altitude precision on Android [\#176](https://github.com/HaylLtd/cordova-background-geolocation-plugin/pull/176) ([Athorcis](https://github.com/Athorcis))
 
@@ -211,6 +214,10 @@
 ## [v1.0.0](https://github.com/HaylLtd/cordova-background-geolocation-plugin/tree/v1.0.0) (2021-05-04)
 
 ## [v1.0.0-rc.5](https://github.com/HaylLtd/cordova-background-geolocation-plugin/tree/v1.0.0-rc.5) (2021-05-03)
+
+**Implemented enhancements:**
+
+- GPS transactional location fetch [\#38](https://github.com/HaylLtd/cordova-background-geolocation-plugin/pull/38) ([HarelM](https://github.com/HarelM))
 
 **Fixed bugs:**
 

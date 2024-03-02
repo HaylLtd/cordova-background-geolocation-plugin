@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: 17
+          distribution: zulu
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Create local package
+        run: npm pack
+
+      - name: Create capacitor app and build it
+        run: | 
+          npm init @capacitor/app temp -- --name temp --app-id temp.com
+          cd temp
+          npm install
+          npm i ../*.tgz
+          npm install @capacitor/android
+          npx cap add android
+          npm run build
+          npx cap sync
+          echo "android.enableJetifier=true" >> ./android/gradle.properties
+          awk 'NR==7 {print "    <string name=\"plugin_bgloc_account_name\">@string/app_name</string>";\
+                      print "    <string name=\"plugin_bgloc_account_type\">temp</string>";\
+                      print "    <string name=\"plugin_bgloc_content_authority\">@string/package_name</string>"}\
+                      1' android/app/src/main/res/values/strings.xml > temp.xml && mv temp.xml android/app/src/main/res/values/strings.xml
+          cd android
+          ./gradlew assembleDebug
+
