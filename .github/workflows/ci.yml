@@ -41,7 +41,6 @@ jobs:
           npm run build
           npx cap sync
           echo "android.enableJetifier=true" >> ./android/gradle.properties
-          cd android/app/src/main/res/values/
           awk 'NR==7 {print "    <string name=\"plugin_bgloc_account_name\">@string/app_name</string>";\
                       print "    <string name=\"plugin_bgloc_account_type\">temp</string>";\
                       print "    <string name=\"plugin_bgloc_content_authority\">@string/package_name</string>"}\
