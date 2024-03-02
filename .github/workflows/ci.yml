@@ -32,5 +32,5 @@ jobs:
           npm i ../*.tgz
           npm install @capacitor/android
           npx cap add android
-          npx cap build
+          npx cap build android
 
