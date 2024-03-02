@@ -18,6 +18,12 @@ jobs:
         with:
           node-version: 20
 
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: 17
+          distribution: zulu
+
       - name: Install dependencies
         run: npm install
 
@@ -34,5 +40,6 @@ jobs:
           npx cap add android
           npm run build
           npx cap sync
+          echo "android.enableJetifier=true" >> ./android/gradle.properties
           npx cap build android
 
