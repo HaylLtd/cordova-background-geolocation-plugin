@@ -33,6 +33,7 @@ jobs:
 
       - name: Add platform
         run: |
+          pwd
           npm install @capacitor/android
           npx cap add android
 
