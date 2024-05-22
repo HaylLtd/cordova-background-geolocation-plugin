@@ -56,6 +56,7 @@ public class NotificationHelper {
 
             builder.setContentTitle(title);
             builder.setContentText(text);
+            builder.setOngoing(true);
             if (smallIcon != null && !smallIcon.isEmpty()) {
                 builder.setSmallIcon(mResolver.getDrawable(smallIcon));
             } else {
