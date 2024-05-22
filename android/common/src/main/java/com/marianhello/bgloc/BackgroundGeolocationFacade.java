@@ -55,7 +55,8 @@ public class BackgroundGeolocationFacade {
 
     public static final String[] PERMISSIONS = {
             Manifest.permission.ACCESS_COARSE_LOCATION,
-            Manifest.permission.ACCESS_FINE_LOCATION
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.PUSH_NOTIFICATION
     };
 
     private boolean mServiceBroadcastReceiverRegistered = false;
