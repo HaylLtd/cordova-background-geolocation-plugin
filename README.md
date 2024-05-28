@@ -1,20 +1,17 @@
 # Cordova Background Geolocation Plugin
 
 [![npm](https://img.shields.io/npm/v/cordova-background-geolocation-plugin?style=flat-square)](https://www.npmjs.com/package/cordova-background-geolocation-plugin)
-![npm bundle size](https://img.shields.io/bundlephobia/min/cordova-background-geolocation-plugin?style=flat-square)
-![npm](https://img.shields.io/npm/dm/cordova-background-geolocation-plugin?style=flat-square)
+![npm downloads](https://img.shields.io/npm/dm/cordova-background-geolocation-plugin?style=flat-square)
 
 [![GitHub issues](https://img.shields.io/github/issues/HaylLtd/cordova-background-geolocation-plugin?style=flat-square)](https://github.com/HaylLtd/cordova-background-geolocation-plugin/issues)
 [![GitHub stars](https://img.shields.io/github/stars/HaylLtd/cordova-background-geolocation-plugin?style=flat-square)](https://github.com/HaylLtd/cordova-background-geolocation-plugin/stargazers)
 ![GitHub last commit](https://img.shields.io/github/last-commit/HaylLtd/cordova-background-geolocation-plugin?style=flat-square)
 
-![cordova](https://img.shields.io/badge/cordova-ios%20%7C%20android-blue?style=flat-square)
-
 ## Introduction
 
-*Cross-platform geolocation for Cordova with battery-saving "circular region monitoring" and "stop detection"*
+*Cross-platform geolocation for Cordova and Capacitor with battery-saving "circular region monitoring" and "stop detection"*
 
-This plugin can be used for geolocation when the app is running in the foreground or background. It is more battery and data efficient than html5 geolocation or cordova-geolocation plugin. It can be used side by side with other geolocation providers (eg. html5 navigator.geolocation).
+This plugin can be used for geolocation when the app is running in the foreground or background. It is more battery and data efficient than html5 geolocation. It can be used side by side with other geolocation providers (eg. html5 navigator.geolocation).
 
 This project is based on [@mauron85/cordova-plugin-background-geolocation](https://github.com/mauron85/cordova-plugin-background-geolocation), which in turn was based on the original [cordova-background-geolocation plugin](https://github.com/christocracy/cordova-plugin-background-geolocation) by [christocracy](https://github.com/christocracy). Hayl Ltd have taken on responsibility for hosting it and will be maintaining it and merging PRs from the community. If you have any fixes, features or updates that you would like included, please do raise a PR or issue on the GitHub repository.
 
@@ -29,6 +26,13 @@ The NPM package can be found at [cordova-background-geolocation-plugin](https://
 ### Installing the plugin
 
 **Note:** for non AndroidX project please use version 1.x of this plugin. Version 2.x and on will support AndroidX.
+
+**Note:** this plugin can be installed on a Capacitor project and it is tested to be working as expected, some configuration may need to be done differently than below according to how Capacitor configuration is implemented.
+
+```bash
+npm install cordova-background-geolocation-plugin
+npx cap sync
+```
 
 ```bash
 cordova plugin add cordova-background-geolocation-plugin

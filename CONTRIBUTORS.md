@@ -1,6 +1,6 @@
 # Contributors
 
-Many thanks to all contributors and special thanks to [christocracy](https://github.com/christocracy) as former author, and [mauron85](https://github.com/mauron85).
+Many thanks to all contributors and special thanks to [christocracy](https://github.com/christocracy) and [mauron85](https://github.com/mauron85) as former authors.
 
 * [mauron85](https://github.com/mauron85)
 * [christocracy](https://github.com/christocracy)
