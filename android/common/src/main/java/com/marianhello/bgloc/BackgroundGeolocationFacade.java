@@ -56,7 +56,6 @@ public class BackgroundGeolocationFacade {
     public static final String[] PERMISSIONS = {
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.POST_NOTIFICATIONS,
     };
 
     private boolean mServiceBroadcastReceiverRegistered = false;
@@ -234,6 +233,13 @@ public class BackgroundGeolocationFacade {
                     mDelegate.onAuthorizationChanged(BackgroundGeolocationFacade.AUTHORIZATION_DENIED);
                 }
             }
+        });
+        permissionManager.checkPermissions(Arrays.asList(Manifest.permission.POST_NOTIFICATIONS), new PermissionManager.PermissionRequestListener() {
+            @Override
+            public void onPermissionGranted() {} // noop
+
+            @Override
+            public void onPermissionDenied(DeniedPermissions deniedPermissions) {} // noop
         });
     }
 
