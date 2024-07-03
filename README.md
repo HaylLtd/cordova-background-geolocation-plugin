@@ -49,7 +49,7 @@ You may also want to change default iOS permission prompts and set specific goog
 
 ```bash
 cordova plugin add cordova-background-geolocation-plugin \
-  --variable GOOGLE_PLAY_SERVICES_VERSION=11+ \
+  --variable GOOGLE_PLAY_SERVICES_VERSION=17+ \
   --variable ALWAYS_USAGE_DESCRIPTION="App requires ..." \
   --variable MOTION_USAGE_DESCRIPTION="App requires motion detection"
 ```
