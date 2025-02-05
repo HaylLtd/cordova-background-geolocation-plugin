@@ -90,7 +90,7 @@ static MAURLocationTransform s_locationTransform = nil;
         
         MAURSQLiteLocationDAO *locationDAO = [MAURSQLiteLocationDAO sharedInstance];
         // TODO: investigate location id always 0
-        NSNumber *locationId = [locationDAO persistLocation:location limitRows:_config.maxLocations.integerValue];
+        NSNumber *locationId = [locationDAO persistLocation:location limitRows:self.config.maxLocations.integerValue];
         
         if (hasConnectivity && [self.config hasValidUrl]) {
             NSError *error = nil;
@@ -111,10 +111,13 @@ static MAURLocationTransform s_locationTransform = nil;
     });
 }
 
-- (BOOL) post:(MAURLocation*)location toUrl:(NSString*)url withTemplate:(id)locationTemplate withHttpHeaders:(NSMutableDictionary*)httpHeaders error:(NSError * __autoreleasing *)outError;
+- (BOOL) post:(MAURLocation*)location 
+         toUrl:(NSString*)url 
+    withTemplate:(id)locationTemplate 
+ withHttpHeaders:(NSMutableDictionary*)httpHeaders 
+         error:(NSError * __autoreleasing *)outError
 {
     NSArray *locations = [[NSArray alloc] initWithObjects:[location toResultFromTemplate:locationTemplate], nil];
-    //    NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData: data options: NSJSONReadingMutableContainers error: &e];
     NSData *data = [NSJSONSerialization dataWithJSONObject:locations options:0 error:outError];
     if (!data) {
         return NO;
@@ -122,18 +125,49 @@ static MAURLocationTransform s_locationTransform = nil;
     
     NSString *jsonStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     
+    NSString *contentType = [httpHeaders objectForKey:@"Content-Type"];
+    if (!contentType) {
+        contentType = @"application/json";
+    }
+    
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:contentType forHTTPHeaderField:@"Content-Type"];
     [request setHTTPMethod:@"POST"];
     if (httpHeaders != nil) {
-        for(id key in httpHeaders) {
-            id value = [httpHeaders objectForKey:key];
-            [request addValue:value forHTTPHeaderField:key];
+        for (id key in httpHeaders) {
+            if (![key isEqualToString:@"Content-Type"]) {
+                NSString *value = [httpHeaders objectForKey:key];
+                [request addValue:value forHTTPHeaderField:key];
+            }
         }
     }
-    [request setHTTPBody:[jsonStr dataUsingEncoding:NSUTF8StringEncoding]];
     
-    // Create url connection and fire request
+    if ([contentType isEqualToString:@"application/x-www-form-urlencoded"]) {
+        id jsonObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:outError];
+        NSDictionary *dict = nil;
+        if ([jsonObject isKindOfClass:[NSArray class]] && [jsonObject count] == 1) {
+            dict = [jsonObject firstObject];
+        } else if ([jsonObject isKindOfClass:[NSDictionary class]]) {
+            dict = jsonObject;
+        }
+        if (dict) {
+            NSMutableArray *parts = [NSMutableArray array];
+            for (NSString *key in dict) {
+                NSString *value = [NSString stringWithFormat:@"%@", dict[key]];
+                NSString *encodedKey = [key stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+                NSString *encodedValue = [value stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+                NSString *part = [NSString stringWithFormat:@"%@=%@", encodedKey, encodedValue];
+                [parts addObject:part];
+            }
+            NSString *encodedString = [parts componentsJoinedByString:@"&"];
+            [request setHTTPBody:[encodedString dataUsingEncoding:NSUTF8StringEncoding]];
+        } else {
+            [request setHTTPBody:[jsonStr dataUsingEncoding:NSUTF8StringEncoding]];
+        }
+    } else {
+        [request setHTTPBody:[jsonStr dataUsingEncoding:NSUTF8StringEncoding]];
+    }
+    
     NSHTTPURLResponse* urlResponse = nil;
     [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:outError];
     
@@ -142,9 +176,7 @@ static MAURLocationTransform s_locationTransform = nil;
     if (statusCode == 285)
     {
         // Okay, but we don't need to continue sending these
-        
         DDLogDebug(@"Location was sent to the server, and received an \"HTTP 285 Updated Not Required\"");
-        
         dispatch_async(dispatch_get_main_queue(), ^{
             if (_delegate && [_delegate respondsToSelector:@selector(postLocationTaskRequestedAbortUpdates:)])
             {
@@ -162,7 +194,6 @@ static MAURLocationTransform s_locationTransform = nil;
             }
         });
     }
-    
     // All 2xx statuses are okay
     if (statusCode >= 200 && statusCode < 300)
     {
@@ -174,7 +205,7 @@ static MAURLocationTransform s_locationTransform = nil;
     } else {
         DDLogError(@"%@ Error while posting locations %@", TAG, [*outError localizedDescription]);
     }
-
+    
     return NO;
 }
 

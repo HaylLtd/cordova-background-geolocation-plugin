@@ -18,6 +18,7 @@ import java.util.Iterator;
 import java.net.URL;
 import java.net.HttpURLConnection;
 import java.io.OutputStreamWriter;
+import java.net.URLEncoder;
 
 public class HttpPostService {
     public static final int BUFFER_SIZE = 1024;
@@ -49,16 +50,23 @@ public class HttpPostService {
         if (json != null) {
             jsonString = json.toString();
         }
-
         return postJSONString(jsonString, headers);
     }
 
     public int postJSON(JSONArray json, Map headers) throws IOException {
         String jsonString = "null";
         if (json != null) {
-            jsonString = json.toString();
+            if (json.length() == 1) {
+                JSONObject single = json.optJSONObject(0);
+                if (single != null) {
+                    jsonString = single.toString();
+                } else {
+                    jsonString = json.toString();
+                }
+            } else {
+                jsonString = json.toString();
+            }
         }
-
         return postJSONString(jsonString, headers);
     }
 
@@ -66,31 +74,70 @@ public class HttpPostService {
         if (headers == null) {
             headers = new HashMap();
         }
-
+        
+        String contentType = null;
+        for (Object keyObj : headers.keySet()) {
+            String key = (String) keyObj;
+            if (key.equalsIgnoreCase("Content-Type")) {
+                contentType = (String) headers.get(key);
+                break;
+            }
+        }
+        if (contentType == null) {
+            contentType = "application/json";
+        }
+        
+        String finalBody = body;
+        if (contentType.equalsIgnoreCase("application/x-www-form-urlencoded")) {
+            try {
+                finalBody = jsonToUrlEncoded(body);
+            } catch (Exception e) {
+                finalBody = body;
+            }
+        }
+        
         HttpURLConnection conn = this.openConnection();
         conn.setDoOutput(true);
-        conn.setFixedLengthStreamingMode(body.length());
+        conn.setFixedLengthStreamingMode(finalBody.length());
         conn.setRequestMethod("POST");
-        conn.setRequestProperty("Content-Type", "application/json");
+        conn.setRequestProperty("Content-Type", contentType);
+        
         Iterator<Map.Entry<String, String>> it = headers.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry<String, String> pair = it.next();
-            conn.setRequestProperty(pair.getKey(), pair.getValue());
+            if (!pair.getKey().equalsIgnoreCase("Content-Type")) {
+                conn.setRequestProperty(pair.getKey(), pair.getValue());
+            }
         }
-
+        
         OutputStreamWriter os = null;
         try {
             os = new OutputStreamWriter(conn.getOutputStream());
-            os.write(body);
-
+            os.write(finalBody);
         } finally {
             if (os != null) {
                 os.flush();
                 os.close();
             }
         }
-
         return conn.getResponseCode();
+    }
+    
+    private String jsonToUrlEncoded(String jsonString) throws Exception {
+        JSONObject json = new JSONObject(jsonString);
+        StringBuilder result = new StringBuilder();
+        Iterator<String> keys = json.keys();
+        while (keys.hasNext()) {
+            String key = keys.next();
+            String value = json.get(key).toString();
+            if (result.length() > 0) {
+                result.append("&");
+            }
+            result.append(URLEncoder.encode(key, "UTF-8"));
+            result.append("=");
+            result.append(URLEncoder.encode(value, "UTF-8"));
+        }
+        return result.toString();
     }
 
     public int postJSONFile(File file, Map headers, UploadingProgressListener listener) throws IOException {
