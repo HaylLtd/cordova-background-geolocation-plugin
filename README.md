@@ -1,4 +1,4 @@
-# Cordova  Background Geolocation Plugin
+# Cordova Background Geolocation Plugin
 
 [![npm](https://img.shields.io/npm/v/cordova-background-geolocation-plugin?style=flat-square)](https://www.npmjs.com/package/cordova-background-geolocation-plugin)
 ![npm downloads](https://img.shields.io/npm/dm/cordova-background-geolocation-plugin?style=flat-square)
