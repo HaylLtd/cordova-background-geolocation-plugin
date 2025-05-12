@@ -321,7 +321,10 @@ FMDBLogger *sqliteLogger;
     [self runOnMainThread:^{
         BOOL canGoToSettings = (UIApplicationOpenSettingsURLString != NULL);
         if (canGoToSettings) {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+            NSURL *settingsURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+            [[UIApplication sharedApplication] openURL:settingsURL 
+                                               options:@{} 
+                                     completionHandler:nil];
         }
     }];
 }

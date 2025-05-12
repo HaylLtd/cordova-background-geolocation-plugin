@@ -1,8 +1,17 @@
 # Changelog
 
-## [Unreleased](https://github.com/HaylLtd/cordova-background-geolocation-plugin/tree/HEAD)
+## [v2.3.2](https://github.com/HaylLtd/cordova-background-geolocation-plugin/tree/v2.3.2) (2025-03-24)
 
-[Full Changelog](https://github.com/HaylLtd/cordova-background-geolocation-plugin/compare/v2.3.0...HEAD)
+[Full Changelog](https://github.com/HaylLtd/cordova-background-geolocation-plugin/compare/v2.3.1...v2.3.2)
+
+**Merged pull requests:**
+
+- Update show app settings for IOS 18 support [\#207](https://github.com/HaylLtd/cordova-background-geolocation-plugin/pull/207) ([AbdullahSohail-SE](https://github.com/AbdullahSohail-SE))
+- Update Java to 21 [\#204](https://github.com/HaylLtd/cordova-background-geolocation-plugin/pull/204) ([HarelM](https://github.com/HarelM))
+
+## [v2.3.1](https://github.com/HaylLtd/cordova-background-geolocation-plugin/tree/v2.3.1) (2024-08-03)
+
+[Full Changelog](https://github.com/HaylLtd/cordova-background-geolocation-plugin/compare/v2.3.0...v2.3.1)
 
 **Merged pull requests:**
 
