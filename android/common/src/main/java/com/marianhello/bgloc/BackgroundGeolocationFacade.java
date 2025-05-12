@@ -220,6 +220,14 @@ public class BackgroundGeolocationFacade {
             @Override
             public void onPermissionGranted() {
                 logger.info("User granted requested permissions");
+                permissionManager.checkPermissions(Arrays.asList(Manifest.permission.POST_NOTIFICATIONS), new PermissionManager.PermissionRequestListener() {
+                    @Override
+                    public void onPermissionGranted() {} // noop
+        
+                    @Override
+                    public void onPermissionDenied(DeniedPermissions deniedPermissions) {} // noop
+                });
+
                 // watch location mode changes
                 registerLocationModeChangeReceiver();
                 registerServiceBroadcast();
@@ -233,13 +241,6 @@ public class BackgroundGeolocationFacade {
                     mDelegate.onAuthorizationChanged(BackgroundGeolocationFacade.AUTHORIZATION_DENIED);
                 }
             }
-        });
-        permissionManager.checkPermissions(Arrays.asList(Manifest.permission.POST_NOTIFICATIONS), new PermissionManager.PermissionRequestListener() {
-            @Override
-            public void onPermissionGranted() {} // noop
-
-            @Override
-            public void onPermissionDenied(DeniedPermissions deniedPermissions) {} // noop
         });
     }
 
