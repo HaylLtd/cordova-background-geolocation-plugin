@@ -49,6 +49,12 @@ public class RawLocationProvider extends AbstractLocationProvider implements Loc
             criteria.setPowerRequirement(Criteria.POWER_HIGH);
             provider = locationManager.getBestProvider(criteria, true);
         }
+
+        if (provider == null) {
+            logger.error("No suitable location provider found.");
+            return;
+        }
+        
         try {
             logger.info("Requesting location updates from provider {}", provider);
             locationManager.requestLocationUpdates(provider, mConfig.getInterval(), mConfig.getDistanceFilter(), this);
