@@ -194,7 +194,14 @@
             </feature>
         </config-file>
 
+        <!-- For Cordova-Android <15 the resource strings need to be stored in strings.xml-->
         <config-file target="res/values/strings.xml" parent="/resources">
+            <string name="plugin_bgloc_account_name">$ACCOUNT_NAME</string>
+            <string name="plugin_bgloc_account_type">$ACCOUNT_TYPE</string>
+            <string name="plugin_bgloc_content_authority">$CONTENT_AUTHORITY</string>
+        </config-file>
+        <!-- For Cordova-Android >=15 the resource strings need to be stored in cdv_strings.xml-->
+        <config-file target="app/src/main/res/values/cdv_strings.xml" parent="/resources">
             <string name="plugin_bgloc_account_name">$ACCOUNT_NAME</string>
             <string name="plugin_bgloc_account_type">$ACCOUNT_TYPE</string>
             <string name="plugin_bgloc_content_authority">$CONTENT_AUTHORITY</string>
